@@ -1,20 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
+using Task1.Player;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerScore : MonoBehaviour
+namespace Task1.Score
 {
-    [SerializeField] private Text scoreText;
-
-    [SerializeField] private int scoreMultiply = 1;
-
-    private int scoreCount = 0;
-
-    public void AddScore()
+    public class PlayerScore : MonoBehaviour
     {
-        Debug.Log("3434343");
-        scoreCount = scoreCount + scoreMultiply;
-        scoreText.text = "" + scoreCount;
+        [SerializeField] private Text scoreText;
+        [SerializeField] private PlayerStats playerScore;
+
+        public void AddScore()
+        {
+            scoreText.text = "" + playerScore.GetScore();
+        }
     }
 }
+

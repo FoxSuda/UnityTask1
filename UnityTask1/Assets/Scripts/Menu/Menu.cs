@@ -1,17 +1,35 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
-public class Menu : MonoBehaviour
+namespace Task1.UI
 {
-    public void StartGame()
+    public class Menu : MonoBehaviour
     {
-        SceneManager.LoadScene("Main");
-    }
+        [SerializeField] private Button startButton;
+        [SerializeField] private Button quitButton;
 
-    public void QuitGame()
-    {
-        Application.Quit();
+        private void Awake()
+        {
+            startButton.onClick.AddListener(StartGame);
+            quitButton.onClick.AddListener(QuitGame);
+        }
+
+        private void OnDestroy()
+        {
+            startButton.onClick.RemoveListener(StartGame);
+            quitButton.onClick.RemoveListener(QuitGame);
+        }
+
+        public void StartGame()
+        {
+            SceneManager.LoadScene("Main");
+        }
+
+        public void QuitGame()
+        {
+            Application.Quit();
+        }
     }
 }
+

@@ -1,12 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class BootSceneController : MonoBehaviour
+namespace Task1.Initialization
 {
-    private void Start()
+    public class BootSceneController : MonoBehaviour
     {
-        SceneManager.LoadScene("StartMenu");
+        private void Start()
+        {
+            SceneManager.LoadScene("StartMenu");
+        }
     }
 }
+

@@ -1,35 +1,36 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraRotation : MonoBehaviour
+namespace Task1.PlayerCamera
 {
-    [SerializeField] private float sensX;
-    [SerializeField] private float sensY;
-
-    [SerializeField] private Transform orientation;
-
-    private float xRotation;
-    private float yRotation;
-
-    private void Start()
+    public class CameraRotation : MonoBehaviour
     {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-    }
+        [SerializeField] private float sensX;
+        [SerializeField] private float sensY;
 
-    private void Update()
-    {
-        float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * sensX;
-        float mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime * sensY;
+        [SerializeField] private Transform orientation;
 
-        yRotation += mouseX;
+        private float xRotation;
+        private float yRotation;
 
-        xRotation -= mouseY;
-        xRotation = Mathf.Clamp(xRotation, -90f, 90f);
+        private void Start()
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
 
-        transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
-        orientation.rotation = Quaternion.Euler(0, yRotation, 0);
+        private void Update()
+        {
+            float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * sensX;
+            float mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime * sensY;
+
+            yRotation += mouseX;
+
+            xRotation -= mouseY;
+            xRotation = Mathf.Clamp(xRotation, -150f, -20f);
+
+            transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
+            orientation.rotation = Quaternion.Euler(0, yRotation, 0);
+        }
     }
 }
+

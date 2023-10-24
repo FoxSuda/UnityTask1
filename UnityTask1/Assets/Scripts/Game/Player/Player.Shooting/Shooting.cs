@@ -1,24 +1,35 @@
-using System.Collections;
-using System.Collections.Generic;
+using Task1.Player;
+using Task1.Score;
 using UnityEngine;
 
-public class Shooting : MonoBehaviour
+namespace Task1.PlayerBullet
 {
-    [SerializeField] private GameObject bulletPrefab;
-    [SerializeField] private float bulletSpeed = 10f;
-    [SerializeField] private float bulletLifetime = 10f;
-    [SerializeField] private Transform firePoint;
-
-    void Update()
+    public class Shooting : MonoBehaviour
     {
-        if (Input.GetMouseButtonDown(0))
+        [SerializeField] private GameObject bulletPrefab;
+        [SerializeField] private PlayerStats playerStats;
+
+        [SerializeField] private float bulletSpeed = 10f;
+        [SerializeField] private float bulletLifetime = 10f;
+
+        [SerializeField] private Transform bulletParent;
+        [SerializeField] private Transform firePoint;
+
+        void Update()
         {
-            GameObject bullet = Instantiate(bulletPrefab, firePoint.position, transform.rotation);
+            if (Input.GetMouseButtonDown(0))
+            {
+                GameObject bullet = Instantiate(bulletPrefab, firePoint.position, transform.rotation, bulletParent);
 
-            Rigidbody rb = bullet.GetComponent<Rigidbody>();
-            rb.velocity = transform.forward * bulletSpeed;
+                DamageEnemy player = bullet.GetComponent<DamageEnemy>();
+                player.DoDamageToEnemy(playerStats);
 
-            Destroy(bullet, bulletLifetime);
+                Rigidbody rb = bullet.GetComponent<Rigidbody>();
+                rb.velocity = transform.forward * bulletSpeed;
+
+                Destroy(bullet, bulletLifetime);
+            }
         }
     }
 }
+

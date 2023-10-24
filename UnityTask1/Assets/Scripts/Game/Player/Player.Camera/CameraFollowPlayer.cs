@@ -1,13 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraFollowPlayer : MonoBehaviour
+namespace Task1.PlayerCamera
 {
-    [SerializeField] Transform cameraPosition;
-
-    void Update()
+    public class CameraFollowPlayer : MonoBehaviour
     {
-        transform.position = cameraPosition.position;
+        [SerializeField] Transform cameraPosition;
+
+        void Update()
+        {
+            transform.position = cameraPosition.position;
+        }
     }
 }
+
