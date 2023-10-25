@@ -1,3 +1,4 @@
+using Task1.EnemyStats;
 using Task1.Player;
 using UnityEngine;
 
@@ -7,17 +8,19 @@ namespace Task1.PlayerBullet
     {
 
         private PlayerStats player;
+        private PlayerWeaponBase weapon;
 
-        public void DoDamageToEnemy(PlayerStats player)
+        public void DoDamageToEnemy(PlayerStats player, PlayerWeaponBase weapon)
         {
             this.player = player;
+            this.weapon = weapon;
         }
 
         private void OnCollisionEnter(Collision collision)
         {
-            if (collision.gameObject.TryGetComponent(out IEnemyStats enemy))
+            if (collision.gameObject.TryGetComponent(out EnemyBase enemy))
             {
-                enemy.TakeDamage(player.DoDamage(), player);
+                enemy.TakeDamage(weapon.damage, player);
             }
 
             Destroy(gameObject);

@@ -3,37 +3,14 @@ using UnityEngine;
 
 namespace Task1.EnemyStats
 {
-    public class HeavyEnemyStats : MonoBehaviour, IEnemyStats
+    public class HeavyEnemyStats : EnemyBase
     {
-
-        [SerializeField] private float moveSpeed = 6f;
-        [SerializeField] private float health = 45f;
-        [SerializeField] private float damage = 45f;
-        [SerializeField] private int score = 1;
-
-        public float GetMovementSpeed()
+        private void Start()
         {
-            return moveSpeed;
-        }
-
-        public float GetHealthLevel()
-        {
-            return health;
-        }
-        
-        public float DoDamage()
-        {
-            return damage;
-        }
-
-        public void TakeDamage(float damageAmount, PlayerStats player)
-        {
-            health -= damageAmount;
-            if (health <= 0)
-            {
-                player.AddScore(score);
-                Destroy(gameObject);
-            }
+            moveSpeed = 6f;
+            health = 45f;
+            damage = 45f;
+            score = 1;
         }
     }
 }

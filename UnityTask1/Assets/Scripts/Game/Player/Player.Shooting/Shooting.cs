@@ -1,5 +1,4 @@
 using Task1.Player;
-using Task1.Score;
 using UnityEngine;
 
 namespace Task1.PlayerBullet
@@ -19,15 +18,26 @@ namespace Task1.PlayerBullet
         {
             if (Input.GetMouseButtonDown(0))
             {
-                GameObject bullet = Instantiate(bulletPrefab, firePoint.position, transform.rotation, bulletParent);
+                GameObject currentWeapon = playerStats.GetCurrentWeapon();
+                PlayerWeaponBase shootWeapon = currentWeapon.GetComponent<PlayerWeaponBase>();
 
-                DamageEnemy player = bullet.GetComponent<DamageEnemy>();
-                player.DoDamageToEnemy(playerStats);
+                bool isShooting = shootWeapon.Shoot();
 
-                Rigidbody rb = bullet.GetComponent<Rigidbody>();
-                rb.velocity = transform.forward * bulletSpeed;
+                if (isShooting)
+                {
+                    GameObject bullet = Instantiate(bulletPrefab, firePoint.position, transform.rotation, bulletParent);
 
-                Destroy(bullet, bulletLifetime);
+                    DamageEnemy player = bullet.GetComponent<DamageEnemy>();
+                    player.DoDamageToEnemy(playerStats, shootWeapon);
+
+                    Rigidbody rb = bullet.GetComponent<Rigidbody>();
+                    rb.velocity = transform.forward * bulletSpeed;
+
+                    Destroy(bullet, bulletLifetime);
+                } else
+                {
+                    shootWeapon.Reload();
+                }
             }
         }
     }

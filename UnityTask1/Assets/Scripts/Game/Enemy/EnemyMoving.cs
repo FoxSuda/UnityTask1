@@ -1,3 +1,4 @@
+using Task1.EnemyStats;
 using UnityEngine;
 
 namespace Task1.Enemy
@@ -8,14 +9,14 @@ namespace Task1.Enemy
 
         private Rigidbody rb;
         private Transform player;
-        private IEnemyStats enemyStats;
+        private EnemyBase enemyStats;
 
         void Start()
         {
             rb = GetComponent<Rigidbody>();
             player = GameObject.FindGameObjectWithTag(playerTag).transform;
 
-            enemyStats = GetComponent<IEnemyStats>();
+            enemyStats = GetComponent<EnemyBase>();
         }
 
         void Update()

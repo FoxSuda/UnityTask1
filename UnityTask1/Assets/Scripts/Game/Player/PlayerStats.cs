@@ -14,6 +14,8 @@ namespace Task1.Player
         [SerializeField] private float damage = 15f;
         [SerializeField] private int score = 0;
 
+        private GameObject currentWeapon;
+
         public float GetMovementSpeed()
         {
             return moveSpeed;
@@ -29,6 +31,14 @@ namespace Task1.Player
         public float DoDamage()
         {
             return damage;
+        }
+        public GameObject GetCurrentWeapon()
+        {
+            return currentWeapon;
+        }
+        public void SetCurrentWeapon(GameObject currentWeapon)
+        {
+            this.currentWeapon = currentWeapon;
         }
         public float GetScore()
         {
