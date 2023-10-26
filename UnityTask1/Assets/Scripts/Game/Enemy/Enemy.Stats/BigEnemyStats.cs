@@ -1,6 +1,6 @@
 namespace Task1.EnemyStats
 {
-    public class MediumEnemyStats : EnemyBase
+    public class BigEnemyStats : EnemyBase
     {
         private void Start()
         {

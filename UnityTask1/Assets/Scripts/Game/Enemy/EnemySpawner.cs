@@ -1,5 +1,4 @@
 using System.Collections;
-using Task1.Score;
 using UnityEngine;
 
 namespace Task1.Enemy

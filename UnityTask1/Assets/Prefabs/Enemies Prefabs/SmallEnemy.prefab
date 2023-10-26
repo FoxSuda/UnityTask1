@@ -161,10 +161,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4c1b85f46a6f0b4db56a012dee2be3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 8
-  health: 15
-  damage: 15
-  score: 1
+  enemyConfiguration: {fileID: 11400000, guid: f55ed2fc99c7f8845b50ee3bd0a6e97b, type: 2}
 --- !u!114 &8243032460650418676
 MonoBehaviour:
   m_ObjectHideFlags: 0

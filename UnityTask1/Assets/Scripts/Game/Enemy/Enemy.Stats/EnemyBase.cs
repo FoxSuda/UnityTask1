@@ -1,38 +1,40 @@
 using Task1.Player;
 using UnityEngine;
-using UnityEngine.SocialPlatforms.Impl;
 
 namespace Task1.EnemyStats
 {
     public class EnemyBase : MonoBehaviour
     {
+        public EnemyConfiguration enemyConfiguration;
 
-        public float moveSpeed = 7f;
-        public float health = 30f;
-        public float damage = 30f;
-        public int score = 1;
+        private float _health;
+
+        private void Awake()
+        {
+            _health = enemyConfiguration.health;
+        }
 
         public float GetMovementSpeed()
         {
-            return moveSpeed;
+            return enemyConfiguration.moveSpeed;
         }
 
         public float GetHealthLevel()
         {
-            return health;
+            return enemyConfiguration.health;
         }
 
         public float DoDamage()
         {
-            return damage;
+            return enemyConfiguration.damage;
         }
 
         public void TakeDamage(float damageAmount, PlayerStats player)
         {
-            health -= damageAmount;
-            if (health <= 0)
+            _health -= damageAmount;
+            if (_health <= 0)
             {
-                player.AddScore(score);
+                player.AddScore(enemyConfiguration.scoreForEnemy);
                 Destroy(gameObject);
             }
         }

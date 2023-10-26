@@ -1,24 +1,26 @@
+using System;
 using UnityEngine;
 
 public class InputManager : MonoBehaviour
 {
+    private InputController inputController;
     private WeaponManager weaponManager;
 
     private void Start()
     {
+        inputController = GetComponent<InputController>();
+        inputController.OnSwitchPrimaryWeapon += SwitchPrimaryWeapon;
+        inputController.OnSwitchSecondaryWeapon += SwitchSecondaryWeapon;
         weaponManager = GetComponent<WeaponManager>();
     }
 
-    private void Update()
+    private void SwitchPrimaryWeapon()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            weaponManager.SwitchToPrimaryWeapon();
-        }
+        weaponManager.SwitchToPrimaryWeapon();
+    }
 
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            weaponManager.SwitchToSecondaryWeapon();
-        }
+    private void SwitchSecondaryWeapon()
+    {
+        weaponManager.SwitchToSecondaryWeapon();
     }
 }

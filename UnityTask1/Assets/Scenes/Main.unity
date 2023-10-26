@@ -651,6 +651,49 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   primaryWeapon: {fileID: 1915358211}
   secondaryWeapon: {fileID: 1592537908}
+  currentWeapon: {fileID: 0}
+--- !u!114 &1089367777
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1089367769}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b643648127063b41875c9349a11e927, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1089367781
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1089367769}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: f0b6788586a2afd499271078fffc7ec3, type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: PlayerInput
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1 &1096580917
 GameObject:
   m_ObjectHideFlags: 0
@@ -1543,6 +1586,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8044527675899053050, guid: ae3874a6bf655974b87e67ad91750ca3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1089367775}
+    - targetCorrespondingSourceObject: {fileID: 8044527675899053050, guid: ae3874a6bf655974b87e67ad91750ca3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1089367777}
+    - targetCorrespondingSourceObject: {fileID: 8044527675899053050, guid: ae3874a6bf655974b87e67ad91750ca3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1089367781}
     - targetCorrespondingSourceObject: {fileID: 8791558203960214508, guid: ae3874a6bf655974b87e67ad91750ca3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 107908007}

@@ -1,9 +1,15 @@
+using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Task1.Player
 {
     public class PlayerMovement : MonoBehaviour
     {
+        private InputController inputController;
+        private PlayerInputs playerInputs;
+        private InputAction moveAction;
+
         [HideInInspector]
         public float moveSpeed;
 
@@ -36,6 +42,8 @@ namespace Task1.Player
 
         private void Start()
         {
+            playerInputs = GetComponent<PlayerInputs>();
+            moveAction = playerInputs.FindAction("PlayerMovement");
             rb = GetComponent<Rigidbody>();
             rb.freezeRotation = true;
 
@@ -57,7 +65,8 @@ namespace Task1.Player
             if (grounded)
             {
                 rb.drag = groundDrag;
-            } else
+            }
+            else
             {
                 rb.drag = 0;
             }
@@ -65,9 +74,6 @@ namespace Task1.Player
 
         private void MyInput()
         {
-            horizontalInput = Input.GetAxisRaw("Horizontal");
-            verticalInput = Input.GetAxisRaw("Vertical");
-
             if(Input.GetKey(jumpKey) && readyToJump && grounded)
             {
                 readyToJump = false;
@@ -80,7 +86,7 @@ namespace Task1.Player
 
         private void MovePlayer()
         {
-            moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
+            moveDirection = moveAction.ReadValue<Vector3>();
 
             if (grounded)
             {
@@ -94,7 +100,7 @@ namespace Task1.Player
 
         private void SpeedControl()
         {
-            Vector3 flatVel = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+            Vector2 flatVel = new Vector3(rb.velocity.x, rb.velocity.z);
 
             if(flatVel.magnitude > playerStats.GetMovementSpeed())
             {
