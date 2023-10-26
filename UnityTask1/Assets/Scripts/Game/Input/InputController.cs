@@ -8,10 +8,12 @@ public class InputController : MonoBehaviour
     private PlayerInputs playerInputActions;
 
     public delegate void SwitchWeaponEvent();
-    public delegate void PlayerMovementEvent();
 
     public event SwitchWeaponEvent OnSwitchPrimaryWeapon;
     public event SwitchWeaponEvent OnSwitchSecondaryWeapon;
+
+    public float moveActionsHor;
+    public float moveActionsVer;
 
     private void Awake()
     {
@@ -19,7 +21,11 @@ public class InputController : MonoBehaviour
         playerInputActions.PlayerInput.SwitchWeaponMain.started += SwitchWeaponMainStarted;
     }
 
-
+    private void Update()
+    {
+        moveActionsHor = playerInputActions.PlayerInput.PlayerMovementHorizontal.ReadValue<float>();
+        moveActionsVer = playerInputActions.PlayerInput.PlayerMovementVertical.ReadValue<float>();
+    }
 
     private void OnEnable()
     {

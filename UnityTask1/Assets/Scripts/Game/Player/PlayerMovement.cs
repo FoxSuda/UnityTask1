@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 namespace Task1.Player
@@ -7,8 +8,6 @@ namespace Task1.Player
     public class PlayerMovement : MonoBehaviour
     {
         private InputController inputController;
-        private PlayerInputs playerInputs;
-        private InputAction moveAction;
 
         [HideInInspector]
         public float moveSpeed;
@@ -34,7 +33,8 @@ namespace Task1.Player
         private float horizontalInput;
         private float verticalInput;
 
-        private Vector3 moveDirection;
+        private float moveDirectionX;
+        private float moveDirectionZ;
 
         private Rigidbody rb;
 
@@ -42,8 +42,7 @@ namespace Task1.Player
 
         private void Start()
         {
-            playerInputs = GetComponent<PlayerInputs>();
-            moveAction = playerInputs.FindAction("PlayerMovement");
+            inputController = GetComponent<InputController>();
             rb = GetComponent<Rigidbody>();
             rb.freezeRotation = true;
 
@@ -86,12 +85,16 @@ namespace Task1.Player
 
         private void MovePlayer()
         {
-            moveDirection = moveAction.ReadValue<Vector3>();
+            moveDirectionX = inputController.moveActionsHor;
+            moveDirectionZ = inputController.moveActionsVer;
+
+            Vector3 moveDirection = orientation.forward * moveDirectionX + orientation.right * moveDirectionZ;
 
             if (grounded)
             {
                 rb.AddForce(moveDirection.normalized * playerStats.GetMovementSpeed() * 10f, ForceMode.Force);
-            } else if (!grounded)
+            }
+            else if (!grounded)
             {
                 rb.AddForce(moveDirection.normalized * playerStats.GetMovementSpeed() * 10f * airMultiplier, ForceMode.Force);
             }
