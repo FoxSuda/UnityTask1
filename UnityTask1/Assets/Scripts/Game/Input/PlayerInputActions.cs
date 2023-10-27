@@ -38,21 +38,21 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""PlayerMovementHorizontal"",
-                    ""type"": ""PassThrough"",
+                    ""type"": ""Value"",
                     ""id"": ""6c2174ec-794e-41d1-9a25-c4ce3e06958f"",
                     ""expectedControlType"": ""Axis"",
                     ""processors"": """",
                     ""interactions"": """",
-                    ""initialStateCheck"": false
+                    ""initialStateCheck"": true
                 },
                 {
                     ""name"": ""PlayerMovementVertical"",
-                    ""type"": ""PassThrough"",
+                    ""type"": ""Value"",
                     ""id"": ""270f6547-26bb-48a2-8453-592301b40cd8"",
                     ""expectedControlType"": ""Axis"",
                     ""processors"": """",
                     ""interactions"": """",
-                    ""initialStateCheck"": false
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -92,7 +92,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                 {
                     ""name"": ""negative"",
                     ""id"": ""e3eb4cee-f167-43cd-864e-27f0ae671b8e"",
-                    ""path"": ""<Keyboard>/#(S)"",
+                    ""path"": ""<Keyboard>/s"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -103,7 +103,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                 {
                     ""name"": ""positive"",
                     ""id"": ""5f23eb47-d8ab-4958-8906-d3efb6b444b2"",
-                    ""path"": ""<Keyboard>/#(W)"",
+                    ""path"": ""<Keyboard>/w"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -125,7 +125,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                 {
                     ""name"": ""negative"",
                     ""id"": ""452c8c1c-76dc-4c53-9fc9-49df733a21f4"",
-                    ""path"": ""<Keyboard>/#(A)"",
+                    ""path"": ""<Keyboard>/a"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -136,7 +136,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                 {
                     ""name"": ""positive"",
                     ""id"": ""38d33b7e-d470-4c8c-9ad5-90fda11b47dd"",
-                    ""path"": ""<Keyboard>/#(D)"",
+                    ""path"": ""<Keyboard>/d"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",

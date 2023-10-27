@@ -36,6 +36,8 @@ namespace Task1.Player
         private float moveDirectionX;
         private float moveDirectionZ;
 
+        Vector3 moveDirection;
+
         private Rigidbody rb;
 
         private IPlayerStats playerStats;
@@ -73,6 +75,9 @@ namespace Task1.Player
 
         private void MyInput()
         {
+            moveDirectionX = inputController.moveActionsHor;
+            moveDirectionZ = inputController.moveActionsVer;
+
             if(Input.GetKey(jumpKey) && readyToJump && grounded)
             {
                 readyToJump = false;
@@ -85,10 +90,7 @@ namespace Task1.Player
 
         private void MovePlayer()
         {
-            moveDirectionX = inputController.moveActionsHor;
-            moveDirectionZ = inputController.moveActionsVer;
-
-            Vector3 moveDirection = orientation.forward * moveDirectionX + orientation.right * moveDirectionZ;
+            moveDirection = orientation.forward * moveDirectionX + orientation.right * moveDirectionZ;
 
             if (grounded)
             {
@@ -98,12 +100,11 @@ namespace Task1.Player
             {
                 rb.AddForce(moveDirection.normalized * playerStats.GetMovementSpeed() * 10f * airMultiplier, ForceMode.Force);
             }
-
         }
 
         private void SpeedControl()
         {
-            Vector2 flatVel = new Vector3(rb.velocity.x, rb.velocity.z);
+            Vector3 flatVel = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
 
             if(flatVel.magnitude > playerStats.GetMovementSpeed())
             {
