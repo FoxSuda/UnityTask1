@@ -53,6 +53,24 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Jump"",
+                    ""type"": ""Button"",
+                    ""id"": ""e9b35bd7-db8d-48cf-9211-9d15105e1530"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Shoot"",
+                    ""type"": ""Button"",
+                    ""id"": ""db11705d-f750-41f4-8a19-925e434fd32c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -143,6 +161,28 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""action"": ""PlayerMovementVertical"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e06aaf1e-65e6-4ce8-a5c8-fca118aaf152"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""747ac930-bb17-438e-9429-54a9f79cf996"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Shoot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -154,6 +194,8 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         m_PlayerInput_SwitchWeaponMain = m_PlayerInput.FindAction("SwitchWeaponMain", throwIfNotFound: true);
         m_PlayerInput_PlayerMovementHorizontal = m_PlayerInput.FindAction("PlayerMovementHorizontal", throwIfNotFound: true);
         m_PlayerInput_PlayerMovementVertical = m_PlayerInput.FindAction("PlayerMovementVertical", throwIfNotFound: true);
+        m_PlayerInput_Jump = m_PlayerInput.FindAction("Jump", throwIfNotFound: true);
+        m_PlayerInput_Shoot = m_PlayerInput.FindAction("Shoot", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -218,6 +260,8 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerInput_SwitchWeaponMain;
     private readonly InputAction m_PlayerInput_PlayerMovementHorizontal;
     private readonly InputAction m_PlayerInput_PlayerMovementVertical;
+    private readonly InputAction m_PlayerInput_Jump;
+    private readonly InputAction m_PlayerInput_Shoot;
     public struct PlayerInputActions
     {
         private @PlayerInputs m_Wrapper;
@@ -225,6 +269,8 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         public InputAction @SwitchWeaponMain => m_Wrapper.m_PlayerInput_SwitchWeaponMain;
         public InputAction @PlayerMovementHorizontal => m_Wrapper.m_PlayerInput_PlayerMovementHorizontal;
         public InputAction @PlayerMovementVertical => m_Wrapper.m_PlayerInput_PlayerMovementVertical;
+        public InputAction @Jump => m_Wrapper.m_PlayerInput_Jump;
+        public InputAction @Shoot => m_Wrapper.m_PlayerInput_Shoot;
         public InputActionMap Get() { return m_Wrapper.m_PlayerInput; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -243,6 +289,12 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
             @PlayerMovementVertical.started += instance.OnPlayerMovementVertical;
             @PlayerMovementVertical.performed += instance.OnPlayerMovementVertical;
             @PlayerMovementVertical.canceled += instance.OnPlayerMovementVertical;
+            @Jump.started += instance.OnJump;
+            @Jump.performed += instance.OnJump;
+            @Jump.canceled += instance.OnJump;
+            @Shoot.started += instance.OnShoot;
+            @Shoot.performed += instance.OnShoot;
+            @Shoot.canceled += instance.OnShoot;
         }
 
         private void UnregisterCallbacks(IPlayerInputActions instance)
@@ -256,6 +308,12 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
             @PlayerMovementVertical.started -= instance.OnPlayerMovementVertical;
             @PlayerMovementVertical.performed -= instance.OnPlayerMovementVertical;
             @PlayerMovementVertical.canceled -= instance.OnPlayerMovementVertical;
+            @Jump.started -= instance.OnJump;
+            @Jump.performed -= instance.OnJump;
+            @Jump.canceled -= instance.OnJump;
+            @Shoot.started -= instance.OnShoot;
+            @Shoot.performed -= instance.OnShoot;
+            @Shoot.canceled -= instance.OnShoot;
         }
 
         public void RemoveCallbacks(IPlayerInputActions instance)
@@ -278,5 +336,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         void OnSwitchWeaponMain(InputAction.CallbackContext context);
         void OnPlayerMovementHorizontal(InputAction.CallbackContext context);
         void OnPlayerMovementVertical(InputAction.CallbackContext context);
+        void OnJump(InputAction.CallbackContext context);
+        void OnShoot(InputAction.CallbackContext context);
     }
 }

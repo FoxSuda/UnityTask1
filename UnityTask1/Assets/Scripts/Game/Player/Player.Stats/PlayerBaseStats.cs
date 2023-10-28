@@ -3,34 +3,37 @@ using UnityEngine;
 
 namespace Task1.Player
 {
-    public class PlayerStats : MonoBehaviour, IPlayerStats
+    public class PlayerBaseStats : MonoBehaviour
     {
-
+        public PlayerConfiguration playerConfiguration;
         [SerializeField] private PlayerScore playerScore;
-
-        [SerializeField] private float moveSpeed = 7f;
-        [SerializeField] private float jumpForce = 8f;
-        [SerializeField] private float health = 100f;
-        [SerializeField] private float damage = 15f;
-        [SerializeField] private int score = 0;
 
         private GameObject currentWeapon;
 
+        private float _health;
+        private int _score;
+
+        private void Awake()
+        {
+            _health = playerConfiguration.health;
+            _score = playerConfiguration.score;
+        }
+
         public float GetMovementSpeed()
         {
-            return moveSpeed;
+            return playerConfiguration.moveSpeed;
         }
         public float GetJumpStrength()
         {
-            return jumpForce;
+            return playerConfiguration.jumpForce;
         }
         public float GetHealthLevel()
         {
-            return health;
+            return playerConfiguration.health;
         }
         public float DoDamage()
         {
-            return damage;
+            return playerConfiguration.damage;
         }
         public GameObject GetCurrentWeapon()
         {
@@ -42,18 +45,17 @@ namespace Task1.Player
         }
         public float GetScore()
         {
-            return score;
+            return playerConfiguration.score;
         }
         public void AddScore(int score)
         {
-            this.score += score;
+            _score += score;
             playerScore.AddScore();
         }
         public void TakeDamage(float damageAmount)
         {
-            health -= damageAmount;
+            _health -= damageAmount;
         }
 
     }
 }
-

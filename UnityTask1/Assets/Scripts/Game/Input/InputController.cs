@@ -8,9 +8,15 @@ public class InputController : MonoBehaviour
     private PlayerInputs playerInputActions;
 
     public delegate void SwitchWeaponEvent();
+    public delegate void PlayerJumpEvent();
+    public delegate void PlayerShootEvent();
 
     public event SwitchWeaponEvent OnSwitchPrimaryWeapon;
     public event SwitchWeaponEvent OnSwitchSecondaryWeapon;
+
+    public event PlayerJumpEvent OnJump;
+
+    public event PlayerShootEvent OnShoot;
 
     public float moveActionsHor;
     public float moveActionsVer;
@@ -19,6 +25,8 @@ public class InputController : MonoBehaviour
     {
         playerInputActions = new PlayerInputs();
         playerInputActions.PlayerInput.SwitchWeaponMain.started += SwitchWeaponMainStarted;
+        playerInputActions.PlayerInput.Jump.started += JumpStarted;
+        playerInputActions.PlayerInput.Shoot.started += ShootStarted;
     }
 
     private void Update()
@@ -46,6 +54,22 @@ public class InputController : MonoBehaviour
         else
         {
             OnSwitchSecondaryWeapon?.Invoke();
+        }
+    }
+    
+    private void JumpStarted(InputAction.CallbackContext ctx)
+    {
+        if (ctx.control.name == "space")
+        {
+            OnJump?.Invoke();
+        }
+    }
+    
+    private void ShootStarted(InputAction.CallbackContext ctx)
+    {
+        if (ctx.control.name == "leftButton")
+        {
+            OnShoot?.Invoke();
         }
     }
 }

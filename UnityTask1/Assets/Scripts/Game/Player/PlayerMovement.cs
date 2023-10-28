@@ -1,7 +1,4 @@
-using System;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.InputSystem;
 
 namespace Task1.Player
 {
@@ -18,10 +15,6 @@ namespace Task1.Player
         [SerializeField] private float jumpCooldown = 1f;
         [SerializeField] private float airMultiplier = 0.1f;
         private bool readyToJump = true;
-
-        [Header("Keybinds")]
-        [SerializeField]
-        private KeyCode jumpKey = KeyCode.Space;
 
         [Header("Ground Check")]
         [SerializeField] private float playerHeight = 2f;
@@ -40,15 +33,16 @@ namespace Task1.Player
 
         private Rigidbody rb;
 
-        private IPlayerStats playerStats;
+        private PlayerStats playerStats;
 
         private void Start()
         {
             inputController = GetComponent<InputController>();
+            inputController.OnJump += PlayerJump;
             rb = GetComponent<Rigidbody>();
             rb.freezeRotation = true;
 
-            playerStats = GetComponent<IPlayerStats>();
+            playerStats = GetComponent<PlayerStats>();
         }
 
         private void FixedUpdate()
@@ -77,8 +71,11 @@ namespace Task1.Player
         {
             moveDirectionX = inputController.moveActionsHor;
             moveDirectionZ = inputController.moveActionsVer;
+        }
 
-            if(Input.GetKey(jumpKey) && readyToJump && grounded)
+        private void PlayerJump()
+        {
+            if (readyToJump && grounded)
             {
                 readyToJump = false;
 

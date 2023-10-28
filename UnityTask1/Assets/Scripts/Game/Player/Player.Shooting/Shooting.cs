@@ -7,6 +7,7 @@ namespace Task1.PlayerBullet
     {
         [SerializeField] private GameObject bulletPrefab;
         [SerializeField] private PlayerStats playerStats;
+        private InputController inputController;
 
         [SerializeField] private float bulletSpeed = 10f;
         [SerializeField] private float bulletLifetime = 10f;
@@ -14,30 +15,34 @@ namespace Task1.PlayerBullet
         [SerializeField] private Transform bulletParent;
         [SerializeField] private Transform firePoint;
 
-        void Update()
+        private void Start()
         {
-            if (Input.GetMouseButtonDown(0))
+            inputController = GetComponent<InputController>();
+            inputController.OnShoot += Shoot;
+        }
+
+        private void Shoot()
+        {
+            GameObject currentWeapon = playerStats.GetCurrentWeapon();
+            PlayerWeaponBase shootWeapon = currentWeapon.GetComponent<PlayerWeaponBase>();
+
+            bool isShooting = shootWeapon.Shoot();
+
+            if (isShooting)
             {
-                GameObject currentWeapon = playerStats.GetCurrentWeapon();
-                PlayerWeaponBase shootWeapon = currentWeapon.GetComponent<PlayerWeaponBase>();
+                GameObject bullet = Instantiate(bulletPrefab, firePoint.position, transform.rotation, bulletParent);
 
-                bool isShooting = shootWeapon.Shoot();
+                DamageEnemy player = bullet.GetComponent<DamageEnemy>();
+                player.DoDamageToEnemy(playerStats, shootWeapon);
 
-                if (isShooting)
-                {
-                    GameObject bullet = Instantiate(bulletPrefab, firePoint.position, transform.rotation, bulletParent);
+                Rigidbody rb = bullet.GetComponent<Rigidbody>();
+                rb.velocity = transform.forward * bulletSpeed;
 
-                    DamageEnemy player = bullet.GetComponent<DamageEnemy>();
-                    player.DoDamageToEnemy(playerStats, shootWeapon);
-
-                    Rigidbody rb = bullet.GetComponent<Rigidbody>();
-                    rb.velocity = transform.forward * bulletSpeed;
-
-                    Destroy(bullet, bulletLifetime);
-                } else
-                {
-                    shootWeapon.Reload();
-                }
+                Destroy(bullet, bulletLifetime);
+            }
+            else
+            {
+                shootWeapon.Reload();
             }
         }
     }
