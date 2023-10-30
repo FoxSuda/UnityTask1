@@ -5,7 +5,7 @@ namespace Task1.EnemyStats
 {
     public class EnemyBase : MonoBehaviour
     {
-        public EnemyConfiguration enemyConfiguration { get; set; }
+        public EnemyConfiguration enemyConfiguration;
         private float _health;
 
         private void Awake()
