@@ -6,6 +6,7 @@ namespace Task1.Enemy
     public class EnemySpawner : MonoBehaviour
     {
         [SerializeField] private GameObject[] enemyPrefab;
+        [SerializeField] private GameObject soundObject;
 
         [SerializeField] private float minSpawnInterval = 1.0f;
         [SerializeField] private float maxSpawnInterval = 5.0f;
@@ -26,7 +27,9 @@ namespace Task1.Enemy
                 int spawnTypeIndex = Random.Range(0, enemyPrefab.Length);
 
                 Vector3 randomPointOnPlane = GetRandomPointOnPlane();
-                Instantiate(enemyPrefab[spawnTypeIndex], randomPointOnPlane, Quaternion.identity, enemyParent);
+                GameObject newEnemy = Instantiate(enemyPrefab[spawnTypeIndex], randomPointOnPlane, Quaternion.identity, enemyParent);
+                DamagePlayer damagePlayer = newEnemy.GetComponent<DamagePlayer>();
+                damagePlayer.soundObject = soundObject;
 
                 yield return new WaitForSeconds(spawnInterval);
             }

@@ -15,4 +15,4 @@ MonoBehaviour:
   moveSpeed: 8
   health: 15
   damage: 15
-  score: 1
+  scoreForEnemy: 1

@@ -10,6 +10,7 @@ public class InputController : MonoBehaviour
     public delegate void SwitchWeaponEvent();
     public delegate void PlayerJumpEvent();
     public delegate void PlayerShootEvent();
+    public delegate void PlayerGameMenuEvent();
 
     public event SwitchWeaponEvent OnSwitchPrimaryWeapon;
     public event SwitchWeaponEvent OnSwitchSecondaryWeapon;
@@ -17,6 +18,8 @@ public class InputController : MonoBehaviour
     public event PlayerJumpEvent OnJump;
 
     public event PlayerShootEvent OnShoot;
+
+    public event PlayerGameMenuEvent OnOpenCloseGameMenu;
 
     public float moveActionsHor;
     public float moveActionsVer;
@@ -27,6 +30,7 @@ public class InputController : MonoBehaviour
         playerInputActions.PlayerInput.SwitchWeaponMain.started += SwitchWeaponMainStarted;
         playerInputActions.PlayerInput.Jump.started += JumpStarted;
         playerInputActions.PlayerInput.Shoot.started += ShootStarted;
+        playerInputActions.PlayerInput.GameMenu.started += OpenGameMenuStarted;
     }
 
     private void Update()
@@ -47,7 +51,7 @@ public class InputController : MonoBehaviour
 
     private void SwitchWeaponMainStarted(InputAction.CallbackContext ctx)
     {
-        if (ctx.control.name == "1")
+        if (ctx.control.name == "1" && Time.timeScale != 0f)
         {
             OnSwitchPrimaryWeapon?.Invoke();
         }
@@ -59,7 +63,7 @@ public class InputController : MonoBehaviour
     
     private void JumpStarted(InputAction.CallbackContext ctx)
     {
-        if (ctx.control.name == "space")
+        if (Time.timeScale != 0f)
         {
             OnJump?.Invoke();
         }
@@ -67,9 +71,14 @@ public class InputController : MonoBehaviour
     
     private void ShootStarted(InputAction.CallbackContext ctx)
     {
-        if (ctx.control.name == "leftButton")
+        if (Time.timeScale != 0f)
         {
             OnShoot?.Invoke();
         }
+    }
+    
+    private void OpenGameMenuStarted(InputAction.CallbackContext ctx)
+    {
+        OnOpenCloseGameMenu?.Invoke();
     }
 }

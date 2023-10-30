@@ -390,7 +390,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 818545c05bb8a7443931a4238f90a599, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputController: {fileID: 0}
+  soundObject: {fileID: 0}
+  movementSound: {fileID: 0}
+  soundCategory: 1
+  volume: 0.1
+  movementSoundCooldown: 0.4
   moveSpeed: 0
   groundDrag: 5
   jumpForce: 0
@@ -427,12 +431,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 116e71bbc41833d48990e8cc99367584, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerConfiguration: {fileID: 0}
   playerScore: {fileID: 0}
-  moveSpeed: 7
-  jumpForce: 8
-  health: 100
-  damage: 15
-  score: 0
+  soundObject: {fileID: 0}
+  TakedamageSound: {fileID: 0}
 --- !u!114 &4156080016749111063
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -460,7 +462,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfda46b8ecc192647b7797464fab8df9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputController: {fileID: 0}
 --- !u!1 &8791558203960214508
 GameObject:
   m_ObjectHideFlags: 0
@@ -472,6 +473,7 @@ GameObject:
   - component: {fileID: 6729492934034252081}
   - component: {fileID: 4536478197499874803}
   - component: {fileID: 7446884364465558892}
+  - component: {fileID: 486298643400809804}
   - component: {fileID: 6146329377395892834}
   m_Layer: 0
   m_Name: PlayerCamera
@@ -555,6 +557,26 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8791558203960214508}
   m_Enabled: 1
+--- !u!114 &486298643400809804
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8791558203960214508}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a44226c94d4ff304eb42e1dca6e09aba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerStats: {fileID: 3452606112459662130}
+  inputControllerObject: {fileID: 8044527675899053050}
+  bulletPrefab: {fileID: 6100228692189595380, guid: 7698334cb7bf1f9408885aa8aa98d36d, type: 3}
+  soundObject: {fileID: 0}
+  bulletSpeed: 40
+  bulletLifetime: 4
+  bulletParent: {fileID: 6754188153098572054}
+  firePoint: {fileID: 5992624946862243259}
 --- !u!114 &6146329377395892834
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -567,9 +589,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a44226c94d4ff304eb42e1dca6e09aba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 6100228692189595380, guid: 7698334cb7bf1f9408885aa8aa98d36d, type: 3}
   playerStats: {fileID: 3452606112459662130}
-  inputController: {fileID: 5277804649559328832}
+  inputControllerObject: {fileID: 0}
+  bulletPrefab: {fileID: 6100228692189595380, guid: 7698334cb7bf1f9408885aa8aa98d36d, type: 3}
+  soundObject: {fileID: 0}
   bulletSpeed: 40
   bulletLifetime: 4
   bulletParent: {fileID: 6754188153098572054}

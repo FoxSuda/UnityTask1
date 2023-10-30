@@ -6,6 +6,13 @@ namespace Task1.Player
     {
         private InputController inputController;
 
+        [SerializeField] public GameObject soundObject;
+        [SerializeField] private AudioClip movementSound;
+        [SerializeField] private int soundCategory = 0;
+        [SerializeField] private float volume = 0.1f;
+        [SerializeField] private float movementSoundCooldown = 0.4f;
+        private float lastMovementSoundTime = 0.0f;
+
         [HideInInspector]
         public float moveSpeed;
 
@@ -35,7 +42,7 @@ namespace Task1.Player
 
         private PlayerStats playerStats;
 
-        private void Start()
+        private void Awake()
         {
             inputController = GetComponent<InputController>();
             inputController.OnJump += PlayerJump;
@@ -91,6 +98,11 @@ namespace Task1.Player
 
             if (grounded)
             {
+                if (Time.time - lastMovementSoundTime >= movementSoundCooldown && moveDirection != Vector3.zero)
+                {
+                    soundObject.GetComponent<Sound>().PlaySound(movementSound, soundCategory, volume);
+                    lastMovementSoundTime = Time.time;
+                }
                 rb.AddForce(moveDirection.normalized * playerStats.GetMovementSpeed() * 10f, ForceMode.Force);
             }
             else if (!grounded)

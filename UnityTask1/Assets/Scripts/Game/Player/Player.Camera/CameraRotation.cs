@@ -26,7 +26,7 @@ namespace Task1.PlayerCamera
             yRotation += mouseX;
 
             xRotation -= mouseY;
-            xRotation = Mathf.Clamp(xRotation, -150f, -20f);
+            xRotation = Mathf.Clamp(xRotation, -150f, 0f);
 
             transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
             orientation.rotation = Quaternion.Euler(0, yRotation, 0);

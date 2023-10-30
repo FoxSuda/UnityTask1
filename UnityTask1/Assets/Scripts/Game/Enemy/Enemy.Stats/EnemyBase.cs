@@ -5,28 +5,27 @@ namespace Task1.EnemyStats
 {
     public class EnemyBase : MonoBehaviour
     {
-        public EnemyConfiguration enemyConfiguration;
-
+        public EnemyConfiguration enemyConfiguration { get; set; }
         private float _health;
 
         private void Awake()
         {
-            _health = enemyConfiguration.health;
+            _health = enemyConfiguration.Health;
         }
 
         public float GetMovementSpeed()
         {
-            return enemyConfiguration.moveSpeed;
+            return enemyConfiguration.MoveSpeed;
         }
 
         public float GetHealthLevel()
         {
-            return enemyConfiguration.health;
+            return enemyConfiguration.Health;
         }
 
         public float DoDamage()
         {
-            return enemyConfiguration.damage;
+            return enemyConfiguration.Damage;
         }
 
         public void TakeDamage(float damageAmount, PlayerStats player)
@@ -34,7 +33,7 @@ namespace Task1.EnemyStats
             _health -= damageAmount;
             if (_health <= 0)
             {
-                player.AddScore(enemyConfiguration.scoreForEnemy);
+                player.AddScore(enemyConfiguration.ScoreForEnemy);
                 Destroy(gameObject);
             }
         }

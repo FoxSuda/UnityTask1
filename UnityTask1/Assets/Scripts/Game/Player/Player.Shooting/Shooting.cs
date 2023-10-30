@@ -5,8 +5,11 @@ namespace Task1.PlayerBullet
 {
     public class Shooting : MonoBehaviour
     {
-        [SerializeField] private GameObject bulletPrefab;
         [SerializeField] private PlayerStats playerStats;
+
+        [SerializeField] private GameObject inputControllerObject;
+        [SerializeField] private GameObject bulletPrefab;
+        [SerializeField] private GameObject soundObject;
         private InputController inputController;
 
         [SerializeField] private float bulletSpeed = 10f;
@@ -17,7 +20,7 @@ namespace Task1.PlayerBullet
 
         private void Start()
         {
-            inputController = GetComponent<InputController>();
+            inputController = inputControllerObject.GetComponent<InputController>();
             inputController.OnShoot += Shoot;
         }
 
@@ -32,8 +35,9 @@ namespace Task1.PlayerBullet
             {
                 GameObject bullet = Instantiate(bulletPrefab, firePoint.position, transform.rotation, bulletParent);
 
-                DamageEnemy player = bullet.GetComponent<DamageEnemy>();
-                player.DoDamageToEnemy(playerStats, shootWeapon);
+                DamageEnemy playerBullet = bullet.GetComponent<DamageEnemy>();
+                playerBullet.DoDamageToEnemy(playerStats, shootWeapon);
+                playerBullet.soundObject = soundObject;
 
                 Rigidbody rb = bullet.GetComponent<Rigidbody>();
                 rb.velocity = transform.forward * bulletSpeed;

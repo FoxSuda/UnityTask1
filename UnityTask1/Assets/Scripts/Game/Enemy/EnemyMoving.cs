@@ -24,6 +24,9 @@ namespace Task1.Enemy
             if (player != null)
             {
                 Vector3 direction = (player.position - transform.position).normalized;
+
+                direction.y = 0;
+
                 rb.AddForce(direction * enemyStats.GetMovementSpeed(), ForceMode.Force);
 
                 if (rb.velocity.magnitude > enemyStats.GetMovementSpeed())
@@ -31,6 +34,11 @@ namespace Task1.Enemy
                     rb.velocity = rb.velocity.normalized * enemyStats.GetMovementSpeed();
                 }
             }
+
+            float originalRotationX = transform.rotation.eulerAngles.x;
+
+            transform.LookAt(player);
+            transform.rotation = Quaternion.Euler(originalRotationX, transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z);
         }
 
     }

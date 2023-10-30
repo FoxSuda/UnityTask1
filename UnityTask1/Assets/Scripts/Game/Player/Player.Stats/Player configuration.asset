@@ -15,5 +15,5 @@ MonoBehaviour:
   moveSpeed: 7
   jumpForce: 8
   health: 100
-  damage: 15
+  damage: 1
   score: 0

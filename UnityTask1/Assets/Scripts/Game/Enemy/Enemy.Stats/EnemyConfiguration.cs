@@ -3,8 +3,13 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Game/Configs/Enemy configuration", fileName = "Enemy configuration")]
 public class EnemyConfiguration : ScriptableObject
 {
-    public float moveSpeed = 7f;
-    public float health = 30f;
-    public float damage = 30f;
-    public int scoreForEnemy = 1;
+    [SerializeField] private float moveSpeed;
+    [SerializeField] private float health;
+    [SerializeField] private float damage;
+    [SerializeField] private int scoreForEnemy;
+
+    public float MoveSpeed { get => moveSpeed; set => moveSpeed = value; }
+    public float Health { get => health; set => health = value; }
+    public float Damage { get => damage; set => damage = value; }
+    public int ScoreForEnemy { get => scoreForEnemy; set => scoreForEnemy = value; }
 }

@@ -8,32 +8,38 @@ namespace Task1.Player
         public PlayerConfiguration playerConfiguration;
         [SerializeField] private PlayerScore playerScore;
 
+        [SerializeField] private GameObject soundObject;
+        [SerializeField] private AudioClip TakedamageSound;
+        private int soundCategory = 0;
+
         private GameObject currentWeapon;
 
         private float _health;
         private int _score;
+        private float _damage;
 
         private void Awake()
         {
-            _health = playerConfiguration.health;
-            _score = playerConfiguration.score;
+            _health = playerConfiguration.Health;
+            _score = playerConfiguration.Score;
+            _damage = playerConfiguration.Damage;
         }
 
         public float GetMovementSpeed()
         {
-            return playerConfiguration.moveSpeed;
+            return playerConfiguration.MoveSpeed;
         }
         public float GetJumpStrength()
         {
-            return playerConfiguration.jumpForce;
+            return playerConfiguration.JumpForce;
         }
         public float GetHealthLevel()
         {
-            return playerConfiguration.health;
+            return _health;
         }
         public float DoDamage()
         {
-            return playerConfiguration.damage;
+            return _damage;
         }
         public GameObject GetCurrentWeapon()
         {
@@ -45,7 +51,7 @@ namespace Task1.Player
         }
         public float GetScore()
         {
-            return playerConfiguration.score;
+            return _score;
         }
         public void AddScore(int score)
         {
@@ -54,6 +60,7 @@ namespace Task1.Player
         }
         public void TakeDamage(float damageAmount)
         {
+            soundObject.GetComponent<Sound>().PlaySound(TakedamageSound, soundCategory);
             _health -= damageAmount;
         }
 

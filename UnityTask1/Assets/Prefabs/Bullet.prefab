@@ -146,4 +146,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5acdd3fad31ec39498d45b4625ecf846, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EnemyCube: {fileID: 7058109151925082678, guid: c5d8f2e9bd4cb4d4d98135db7c728a1e, type: 3}
+  soundObject: {fileID: 0}
+  damageSound: {fileID: 8300000, guid: f1f4c6531258298469b337d1e8dcb8a0, type: 3}
+  soundCategory: 0

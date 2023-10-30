@@ -6,6 +6,9 @@ namespace Task1.PlayerBullet
 {
     public class DamageEnemy : MonoBehaviour
     {
+        [HideInInspector] public GameObject soundObject;
+        [SerializeField] private AudioClip damageSound;
+        [SerializeField] private int soundCategory = 0;
 
         private PlayerStats player;
         private PlayerWeaponBase weapon;
@@ -20,7 +23,8 @@ namespace Task1.PlayerBullet
         {
             if (collision.gameObject.TryGetComponent(out EnemyBase enemy))
             {
-                enemy.TakeDamage(weapon.damage, player);
+                soundObject.GetComponent<Sound>().PlaySound(damageSound, soundCategory);
+                enemy.TakeDamage(weapon.damage * player.DoDamage(), player);
             }
 
             Destroy(gameObject);
