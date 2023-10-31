@@ -3,12 +3,29 @@ using UnityEngine;
 
 public class PlayerWeaponBase : MonoBehaviour
 {
-    public int damage = 10;
-    public int maxAmmo = 30;
-    public float reloadTime = 2.0f;
+    public WeaponConfiguration weaponConfiguration;
 
     public int currentAmmo;
     private bool isReloading = false;
+
+    private void Awake()
+    {
+        currentAmmo = weaponConfiguration.MaxAmmo;
+    }
+
+    private void OnEnable()
+    {
+        if (currentAmmo <= 0)
+        {
+            isReloading = true;
+            StartCoroutine(EndReload());
+        }
+    }
+
+    public float GetDamage
+    {
+        get { return weaponConfiguration.Damage; }
+    }
 
     public int CurrentAmmo
     {
@@ -32,7 +49,7 @@ public class PlayerWeaponBase : MonoBehaviour
 
     public void Reload()
     {
-        if (currentAmmo < maxAmmo)
+        if (currentAmmo < weaponConfiguration.MaxAmmo && !isReloading)
         {
             isReloading = true;
             StartCoroutine(EndReload());
@@ -41,8 +58,8 @@ public class PlayerWeaponBase : MonoBehaviour
 
     private IEnumerator EndReload()
     {
-        yield return new WaitForSeconds(reloadTime);
-        currentAmmo = maxAmmo;
+        yield return new WaitForSeconds(weaponConfiguration.ReloadTime);
+        currentAmmo = weaponConfiguration.MaxAmmo;
         isReloading = false;
     }
 }

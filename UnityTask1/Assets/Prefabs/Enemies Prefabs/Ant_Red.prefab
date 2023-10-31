@@ -173,7 +173,6 @@ GameObject:
   - component: {fileID: -8898537457033725917}
   - component: {fileID: -6704354249761794787}
   - component: {fileID: 7149767939973378415}
-  - component: {fileID: -3483652509106692235}
   m_Layer: 0
   m_Name: Ant_Red
   m_TagString: Untagged
@@ -308,18 +307,6 @@ MonoBehaviour:
   soundObject: {fileID: 0}
   damageSound: {fileID: 8300000, guid: 4906c3d59527a44459f9478eb77de26c, type: 3}
   soundCategory: 0
---- !u!114 &-3483652509106692235
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1006988486051157077}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f664ccae58b7bf4dadca03c50b2ca1a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1086531069829984439
 GameObject:
   m_ObjectHideFlags: 0

@@ -8,14 +8,11 @@ namespace Task1.PlayerBullet
         [SerializeField] private PlayerStats playerStats;
 
         [SerializeField] private GameObject inputControllerObject;
-        [SerializeField] private GameObject bulletPrefab;
         [SerializeField] private GameObject soundObject;
         private InputController inputController;
 
         [SerializeField] private float bulletSpeed = 10f;
-        [SerializeField] private float bulletLifetime = 10f;
 
-        [SerializeField] private Transform bulletParent;
         [SerializeField] private Transform firePoint;
 
         private void Start()
@@ -33,16 +30,20 @@ namespace Task1.PlayerBullet
 
             if (isShooting)
             {
-                GameObject bullet = Instantiate(bulletPrefab, firePoint.position, transform.rotation, bulletParent);
+                GameObject bullet = ShootingObjectPool.bulletSharedInstance.GetBulletPooledObject();
+                if (bullet != null)
+                {
+                    bullet.transform.position = firePoint.position;
+                    bullet.transform.rotation = transform.rotation;
+                    bullet.SetActive(true);
 
-                DamageEnemy playerBullet = bullet.GetComponent<DamageEnemy>();
-                playerBullet.DoDamageToEnemy(playerStats, shootWeapon);
-                playerBullet.soundObject = soundObject;
+                    DamageEnemy playerBullet = bullet.GetComponent<DamageEnemy>();
+                    playerBullet.DoDamageToEnemy(playerStats, shootWeapon);
+                    playerBullet.soundObject = soundObject;
 
-                Rigidbody rb = bullet.GetComponent<Rigidbody>();
-                rb.velocity = transform.forward * bulletSpeed;
-
-                Destroy(bullet, bulletLifetime);
+                    Rigidbody rb = bullet.GetComponent<Rigidbody>();
+                    rb.velocity = transform.forward * bulletSpeed;
+                }
             }
             else
             {

@@ -14,9 +14,9 @@ namespace Task1.Player
 
         private GameObject currentWeapon;
 
-        private float _health;
-        private int _score;
-        private float _damage;
+        [SerializeField] private float _health;
+        [SerializeField] private int _score;
+        [SerializeField] private float _damage;
 
         private void Awake()
         {

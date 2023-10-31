@@ -1127,6 +1127,7 @@ GameObject:
   - component: {fileID: 520156881}
   - component: {fileID: 520156880}
   - component: {fileID: 520156879}
+  - component: {fileID: 520156883}
   m_Layer: 6
   m_Name: Plane
   m_TagString: Ground
@@ -1221,6 +1222,27 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &520156883
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 520156878}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 10, y: 1, z: 10}
+  m_Center: {x: 0, y: -0.5, z: 0}
 --- !u!1 &583072111
 GameObject:
   m_ObjectHideFlags: 0
@@ -1689,6 +1711,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1096580918}
   - component: {fileID: 1096580919}
+  - component: {fileID: 1096580920}
   m_Layer: 0
   m_Name: SpawnPoints
   m_TagString: Untagged
@@ -1727,19 +1750,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a1dcdea35b032f4cb6abec035aa5536, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefab:
-  - {fileID: 7485990237320295407, guid: 031eb01c40fa79c479c2235c7f469a9c, type: 3}
-  - {fileID: 7141960012651393014, guid: fbbf556c23c2123428ffe3125e801403, type: 3}
-  - {fileID: 1006988486051157077, guid: 00b286560eaefde47802ef4271efe745, type: 3}
   soundObject: {fileID: 2125832409}
   minSpawnInterval: 0.5
   maxSpawnInterval: 2
-  enemyParent: {fileID: 1307350068}
   spawnPoints:
   - {fileID: 796940356}
   - {fileID: 1320717776}
   - {fileID: 451250123}
   - {fileID: 647272551}
+--- !u!114 &1096580920
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1096580917}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 505b1de912917d841a957b1d5f90a900, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EnemyObjects: []
+  enemyObjectToPool:
+  - {fileID: 7485990237320295407, guid: 031eb01c40fa79c479c2235c7f469a9c, type: 3}
+  - {fileID: 7141960012651393014, guid: fbbf556c23c2123428ffe3125e801403, type: 3}
+  - {fileID: 1006988486051157077, guid: 00b286560eaefde47802ef4271efe745, type: 3}
+  eachTypeEnemyAmountToPool: 20
+  enemyParent: {fileID: 1307350068}
 --- !u!1 &1140010898
 GameObject:
   m_ObjectHideFlags: 0
@@ -2900,6 +2937,27 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1659324726}
   m_CullTransparentMesh: 1
+--- !u!1 &1672840072 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8791558203960214508, guid: ae3874a6bf655974b87e67ad91750ca3, type: 3}
+  m_PrefabInstance: {fileID: 7509228970478630917}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1672840077
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1672840072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04f972a6b16335440b8b474593685ada, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BulletObjects: []
+  bulletObjectToPool: {fileID: 6100228692189595380, guid: 7698334cb7bf1f9408885aa8aa98d36d, type: 3}
+  bulletAmountToPool: 45
+  bulletParent: {fileID: 1292013467}
 --- !u!1 &1700254834
 GameObject:
   m_ObjectHideFlags: 0
@@ -3969,6 +4027,22 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 3841180055049382822, guid: ae3874a6bf655974b87e67ad91750ca3, type: 3}
+      propertyPath: damage
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3841180055049382822, guid: ae3874a6bf655974b87e67ad91750ca3, type: 3}
+      propertyPath: maxAmmo
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3841180055049382822, guid: ae3874a6bf655974b87e67ad91750ca3, type: 3}
+      propertyPath: reloadTime
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3841180055049382822, guid: ae3874a6bf655974b87e67ad91750ca3, type: 3}
+      propertyPath: weaponConfiguration
+      value: 
+      objectReference: {fileID: 11400000, guid: fbe79001e65b60c49ba540b7cdfa542e, type: 2}
     - target: {fileID: 4134769254568063008, guid: ae3874a6bf655974b87e67ad91750ca3, type: 3}
       propertyPath: m_Name
       value: PlayerObject
@@ -4005,6 +4079,22 @@ PrefabInstance:
       propertyPath: near clip plane
       value: 0.05
       objectReference: {fileID: 0}
+    - target: {fileID: 4882585298908522723, guid: ae3874a6bf655974b87e67ad91750ca3, type: 3}
+      propertyPath: damage
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4882585298908522723, guid: ae3874a6bf655974b87e67ad91750ca3, type: 3}
+      propertyPath: maxAmmo
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4882585298908522723, guid: ae3874a6bf655974b87e67ad91750ca3, type: 3}
+      propertyPath: reloadTime
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4882585298908522723, guid: ae3874a6bf655974b87e67ad91750ca3, type: 3}
+      propertyPath: weaponConfiguration
+      value: 
+      objectReference: {fileID: 11400000, guid: 38fdcb04005532144875031c3f1a9475, type: 2}
     - target: {fileID: 5283226361771544538, guid: ae3874a6bf655974b87e67ad91750ca3, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -4242,7 +4332,10 @@ PrefabInstance:
     m_RemovedGameObjects:
     - {fileID: 186355691126214182, guid: ae3874a6bf655974b87e67ad91750ca3, type: 3}
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8791558203960214508, guid: ae3874a6bf655974b87e67ad91750ca3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1672840077}
   m_SourcePrefab: {fileID: 100100000, guid: ae3874a6bf655974b87e67ad91750ca3, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

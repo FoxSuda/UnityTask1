@@ -6,9 +6,14 @@ namespace Task1.EnemyStats
     public class EnemyBase : MonoBehaviour
     {
         public EnemyConfiguration enemyConfiguration;
-        private float _health;
+        [SerializeField] private float _health;
 
         private void Awake()
+        {
+            _health = enemyConfiguration.Health;
+        }
+        
+        private void OnEnable()
         {
             _health = enemyConfiguration.Health;
         }
@@ -34,7 +39,7 @@ namespace Task1.EnemyStats
             if (_health <= 0)
             {
                 player.AddScore(enemyConfiguration.ScoreForEnemy);
-                Destroy(gameObject);
+                gameObject.SetActive(false);
             }
         }
     }

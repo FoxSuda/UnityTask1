@@ -24,10 +24,10 @@ namespace Task1.PlayerBullet
             if (collision.gameObject.TryGetComponent(out EnemyBase enemy))
             {
                 soundObject.GetComponent<Sound>().PlaySound(damageSound, soundCategory);
-                enemy.TakeDamage(weapon.damage * player.DoDamage(), player);
+                enemy.TakeDamage(weapon.GetDamage * player.DoDamage(), player);
             }
 
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
     }
 }

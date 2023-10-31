@@ -5,13 +5,11 @@ namespace Task1.Enemy
 {
     public class EnemySpawner : MonoBehaviour
     {
-        [SerializeField] private GameObject[] enemyPrefab;
         [SerializeField] private GameObject soundObject;
 
         [SerializeField] private float minSpawnInterval = 1.0f;
         [SerializeField] private float maxSpawnInterval = 5.0f;
 
-        [SerializeField] private Transform enemyParent;
         [SerializeField] private Transform[] spawnPoints;
 
         private void Start()
@@ -24,12 +22,19 @@ namespace Task1.Enemy
             while (true)
             {
                 float spawnInterval = Random.Range(minSpawnInterval, maxSpawnInterval);
-                int spawnTypeIndex = Random.Range(0, enemyPrefab.Length);
 
                 Vector3 randomPointOnPlane = GetRandomPointOnPlane();
-                GameObject newEnemy = Instantiate(enemyPrefab[spawnTypeIndex], randomPointOnPlane, Quaternion.identity, enemyParent);
-                DamagePlayer damagePlayer = newEnemy.GetComponent<DamagePlayer>();
-                damagePlayer.soundObject = soundObject;
+                GameObject newEnemy = EnemySpawnObjectPool.enemySharedInstance.GetEnemyPooledObject();
+
+                if (newEnemy != null)
+                {
+                    newEnemy.transform.position = randomPointOnPlane;
+                    newEnemy.transform.rotation = Quaternion.identity;
+                    newEnemy.SetActive(true);
+
+                    DamagePlayer damagePlayer = newEnemy.GetComponent<DamagePlayer>();
+                    damagePlayer.soundObject = soundObject;
+                }
 
                 yield return new WaitForSeconds(spawnInterval);
             }
