@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 8
   health: 15
-  damage: 15
+  damage: 5
   scoreForEnemy: 1
