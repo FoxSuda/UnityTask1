@@ -1,7 +1,8 @@
 using Task1.Player;
+using Task1.Pool;
 using UnityEngine;
 
-namespace Task1.PlayerBullet
+namespace Task1.Player
 {
     public class Shooting : MonoBehaviour
     {
@@ -14,6 +15,8 @@ namespace Task1.PlayerBullet
         [SerializeField] private float bulletSpeed = 10f;
 
         [SerializeField] private Transform firePoint;
+        [SerializeField] private BulletObjectPool _bulletObjectPool;
+        
 
         private void Start()
         {
@@ -30,25 +33,41 @@ namespace Task1.PlayerBullet
 
             if (isShooting)
             {
-                GameObject bullet = ShootingObjectPool.bulletSharedInstance.GetBulletPooledObject();
-                if (bullet != null)
+                var pooledBullet = _bulletObjectPool.Pool.Get();
+                if (pooledBullet != null)
                 {
-                    bullet.transform.position = firePoint.position;
-                    bullet.transform.rotation = transform.rotation;
-                    bullet.SetActive(true);
+                    pooledBullet.transform.position = firePoint.position;
+                    pooledBullet.transform.rotation = transform.rotation;
+                    pooledBullet.Initialize(playerStats, shootWeapon, ReleaseBullet);
+                    pooledBullet.soundObject = soundObject;
 
-                    DamageEnemy playerBullet = bullet.GetComponent<DamageEnemy>();
-                    playerBullet.DoDamageToEnemy(playerStats, shootWeapon);
-                    playerBullet.soundObject = soundObject;
-
-                    Rigidbody rb = bullet.GetComponent<Rigidbody>();
+                    Rigidbody rb = pooledBullet.GetComponent<Rigidbody>();
                     rb.velocity = transform.forward * bulletSpeed;
                 }
+                // GameObject bullet = ShootingObjectPool.bulletSharedInstance.GetBulletPooledObject();
+                // if (bullet != null)
+                // {
+                //     bullet.transform.position = firePoint.position;
+                //     bullet.transform.rotation = transform.rotation;
+                //     bullet.SetActive(true);
+                //
+                //     DamageEnemy playerBullet = bullet.GetComponent<DamageEnemy>();
+                //     playerBullet.DoDamageToEnemy(playerStats, shootWeapon);
+                //     playerBullet.soundObject = soundObject;
+                //
+                //     Rigidbody rb = bullet.GetComponent<Rigidbody>();
+                //     rb.velocity = transform.forward * bulletSpeed;
+                // }
             }
             else
             {
                 shootWeapon.Reload();
             }
+        }
+
+        private void ReleaseBullet(PlayerBullet bullet)
+        {
+            _bulletObjectPool.Pool.Release(bullet);
         }
     }
 }
