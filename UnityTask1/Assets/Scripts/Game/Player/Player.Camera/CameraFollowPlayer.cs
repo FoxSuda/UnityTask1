@@ -9,6 +9,7 @@ namespace Task1.PlayerCamera
         void Update()
         {
             transform.position = cameraPosition.position;
+            transform.rotation = cameraPosition.rotation;
         }
     }
 }

@@ -1,4 +1,5 @@
 using System.Collections;
+using Task1.EnemyStats;
 using UnityEngine;
 
 namespace Task1.Enemy
@@ -11,6 +12,8 @@ namespace Task1.Enemy
         [SerializeField] private float maxSpawnInterval = 5.0f;
 
         [SerializeField] private Transform[] spawnPoints;
+        [SerializeField] private EnemyObjectPool _enemyObjectPool;
+        
 
         private void Start()
         {
@@ -24,20 +27,32 @@ namespace Task1.Enemy
                 float spawnInterval = Random.Range(minSpawnInterval, maxSpawnInterval);
 
                 Vector3 randomPointOnPlane = GetRandomPointOnPlane();
-                GameObject newEnemy = EnemySpawnObjectPool.enemySharedInstance.GetEnemyPooledObject();
-
-                if (newEnemy != null)
+                var enemy = _enemyObjectPool.Pool.Get();
+                if (enemy != null)
                 {
-                    newEnemy.transform.position = randomPointOnPlane;
-                    newEnemy.transform.rotation = Quaternion.identity;
-                    newEnemy.SetActive(true);
-
-                    DamagePlayer damagePlayer = newEnemy.GetComponent<DamagePlayer>();
-                    damagePlayer.soundObject = soundObject;
+                    enemy.Initialize(randomPointOnPlane, ReleaseEnemy);
+                    enemy.soundObject = soundObject;
                 }
+                
+                // GameObject newEnemy = EnemySpawnObjectPool.enemySharedInstance.GetEnemyPooledObject();
+                //
+                // if (newEnemy != null)
+                // {
+                //     newEnemy.transform.position = randomPointOnPlane;
+                //     newEnemy.transform.rotation = Quaternion.identity;
+                //     newEnemy.SetActive(true);
+                //
+                //     DamagePlayer damagePlayer = newEnemy.GetComponent<DamagePlayer>();
+                //     damagePlayer.soundObject = soundObject;
+                // }
 
                 yield return new WaitForSeconds(spawnInterval);
             }
+        }
+
+        private void ReleaseEnemy(EnemyBase enemy)
+        {
+            _enemyObjectPool.Pool.Release(enemy);
         }
 
         Vector3 GetRandomPointOnPlane()

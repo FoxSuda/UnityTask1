@@ -1,3 +1,4 @@
+using System;
 using Task1.Player;
 using UnityEngine;
 
@@ -5,8 +6,17 @@ namespace Task1.EnemyStats
 {
     public class EnemyBase : MonoBehaviour
     {
-        public EnemyConfiguration enemyConfiguration;
+        [HideInInspector] public GameObject soundObject;
+        [SerializeField] private EnemyConfiguration enemyConfiguration;
         [SerializeField] private float _health;
+        [SerializeField] private EnemyBaseAttack _enemyAttack;
+        protected Action<EnemyBase> OnEnemyReleased;
+        
+        public void Initialize(Vector3 enemyPosition, Action<EnemyBase> onEnemyReleased)
+        {
+            transform.position = enemyPosition;
+            OnEnemyReleased = onEnemyReleased;
+        }
 
         private void Awake()
         {
@@ -16,6 +26,10 @@ namespace Task1.EnemyStats
         private void OnEnable()
         {
             _health = enemyConfiguration.Health;
+        }
+        public void Dispose()
+        {
+            OnEnemyReleased = null;
         }
 
         public float GetMovementSpeed()
@@ -39,7 +53,7 @@ namespace Task1.EnemyStats
             if (_health <= 0)
             {
                 player.AddScore(enemyConfiguration.ScoreForEnemy);
-                gameObject.SetActive(false);
+               OnEnemyReleased?.Invoke(this);
             }
         }
     }
