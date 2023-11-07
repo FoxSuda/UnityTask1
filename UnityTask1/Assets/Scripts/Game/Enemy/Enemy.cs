@@ -47,7 +47,7 @@ namespace Task1.Enemy
         {
             while (isAttacking)
             {
-                soundObject.GetComponent<Sound>().PlaySound(damageSound, soundCategory);
+                //soundObject.GetComponent<SoundSlider>().PlaySound(damageSound, soundCategory);
                 player.TakeDamage(enemy.DoDamage());
                 attackTimer = Time.time;
                 yield return new WaitForSeconds(attackInterval);

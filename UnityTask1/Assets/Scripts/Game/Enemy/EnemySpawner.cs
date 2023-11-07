@@ -31,7 +31,6 @@ namespace Task1.Enemy
                 if (enemy != null)
                 {
                     enemy.Initialize(randomPointOnPlane, ReleaseEnemy);
-                    enemy.soundObject = soundObject;
                 }
                 
                 // GameObject newEnemy = EnemySpawnObjectPool.enemySharedInstance.GetEnemyPooledObject();

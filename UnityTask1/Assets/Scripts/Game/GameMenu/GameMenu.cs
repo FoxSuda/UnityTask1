@@ -11,8 +11,6 @@ public class GameMenu : MonoBehaviour
     [SerializeField] private GameObject ObjectMainMenu;
     [SerializeField] private GameObject ObjectOptionsMenu;
     [SerializeField] private Button[] buttonObjectsMenu = new Button[3];
-    [SerializeField] private Button[] buttonObjectsOptions = new Button[3];
-    [SerializeField] private Slider[] sliderObjectsOptions = new Slider[3];
 
     public bool mainVolumeMute = false;
     public bool sfxVolumeMute = false;
@@ -23,7 +21,6 @@ public class GameMenu : MonoBehaviour
     private void Start()
     {
         inputController = inputControllerObject.GetComponent<InputController>();
-        audioManager = soundObject.GetComponent<AudioManager>();
         inputController.OnOpenCloseGameMenu += GamePaused;
         inputController.OnOpenCloseGameMenu += MainMenu;
     }
@@ -34,14 +31,6 @@ public class GameMenu : MonoBehaviour
         buttonObjectsMenu[0].onClick.AddListener(MainMenu);
         buttonObjectsMenu[1].onClick.AddListener(OptionsMenu);
         buttonObjectsMenu[2].onClick.AddListener(QuitGame);
-
-        buttonObjectsOptions[0].onClick.AddListener(MuteMainVolume);
-        buttonObjectsOptions[1].onClick.AddListener(MuteSFXVolume);
-        buttonObjectsOptions[2].onClick.AddListener(MuteMusicVolume);
-
-        sliderObjectsOptions[0].onValueChanged.AddListener(OnMainVolumeChanged);
-        sliderObjectsOptions[1].onValueChanged.AddListener(OnSFXVolumeChanged);
-        sliderObjectsOptions[2].onValueChanged.AddListener(OnMusicVolumeChanged);
     }
 
     private void OnDestroy()
@@ -50,14 +39,6 @@ public class GameMenu : MonoBehaviour
         buttonObjectsMenu[0].onClick.RemoveListener(MainMenu);
         buttonObjectsMenu[1].onClick.RemoveListener(OptionsMenu);
         buttonObjectsMenu[2].onClick.RemoveListener(QuitGame);
-
-        buttonObjectsOptions[0].onClick.RemoveListener(MuteMainVolume);
-        buttonObjectsOptions[1].onClick.RemoveListener(MuteSFXVolume);
-        buttonObjectsOptions[2].onClick.RemoveListener(MuteMusicVolume);
-
-        sliderObjectsOptions[0].onValueChanged.RemoveListener(OnMainVolumeChanged);
-        sliderObjectsOptions[1].onValueChanged.RemoveListener(OnSFXVolumeChanged);
-        sliderObjectsOptions[2].onValueChanged.RemoveListener(OnMusicVolumeChanged);
     }
 
     private void GamePaused()

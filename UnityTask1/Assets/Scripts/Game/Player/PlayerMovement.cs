@@ -8,6 +8,7 @@ namespace Task1.Player
 
         [SerializeField] public GameObject soundObject;
         [SerializeField] private AudioClip movementSound;
+        [SerializeField] private AudioSource sound;
         [SerializeField] private int soundCategory = 0;
         [SerializeField] private float volume = 0.1f;
         [SerializeField] private float movementSoundCooldown = 0.4f;
@@ -100,7 +101,7 @@ namespace Task1.Player
             {
                 if (Time.time - lastMovementSoundTime >= movementSoundCooldown && moveDirection != Vector3.zero)
                 {
-                    soundObject.GetComponent<Sound>().PlaySound(movementSound, soundCategory, volume);
+                    sound.Play();
                     lastMovementSoundTime = Time.time;
                 }
                 rb.AddForce(moveDirection.normalized * playerStats.GetMovementSpeed() * 10f, ForceMode.Force);

@@ -7,11 +7,11 @@ public class PeriodicalEnemyAttack : EnemyBaseAttack
 {
     [HideInInspector] public GameObject soundObject;
     [SerializeField] private AudioClip damageSound;
+    [SerializeField] private AudioSource sound;
     [SerializeField] private int soundCategory = 0;
 
     private bool isAttacking = false;
     private float attackInterval = 1.0f;
-    private float attackTimer = 0;
     private Player _currentAttackTarget;
     private IEnumerator _attackRoutine;
 
@@ -26,7 +26,7 @@ public class PeriodicalEnemyAttack : EnemyBaseAttack
 
     private void OnCollisionExit(Collision collision)
     {
-        if (collision.gameObject.TryGetComponent(out PlayerBaseStats player))
+        if (collision.gameObject.TryGetComponent(out Player player))
         {
             isAttacking = false;
             if (_attackRoutine == null)
@@ -42,9 +42,8 @@ public class PeriodicalEnemyAttack : EnemyBaseAttack
     {
         while (isAttacking)
         {
-            soundObject.GetComponent<Sound>().PlaySound(damageSound, soundCategory);
+            sound.Play();
             _currentAttackTarget.TakeDamage(enemyConfiguration.Damage);
-            attackTimer = Time.time;
             yield return new WaitForSeconds(attackInterval);
         }
     }

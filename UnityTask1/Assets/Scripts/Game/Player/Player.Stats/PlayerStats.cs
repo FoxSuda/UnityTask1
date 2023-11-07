@@ -60,7 +60,7 @@ namespace Task1.Player
         }
         public void TakeDamage(float damageAmount)
         {
-            soundObject.GetComponent<Sound>().PlaySound(TakedamageSound, soundCategory);
+            //soundObject.GetComponent<SoundSlider>().PlaySound(TakedamageSound, soundCategory);
             _health -= damageAmount;
         }
 

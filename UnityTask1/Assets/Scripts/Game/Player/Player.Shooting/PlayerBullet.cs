@@ -1,6 +1,7 @@
 using System;
 using Task1.EnemyStats;
 using Task1.Player;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Task1.Player
@@ -9,7 +10,7 @@ namespace Task1.Player
     {
         [HideInInspector] public GameObject soundObject;
         [SerializeField] private AudioClip damageSound;
-        [SerializeField] private int soundCategory = 0;
+        [SerializeField] private AudioSource sound;
 
         private PlayerStats player;
         private PlayerWeaponBase weapon;
@@ -30,7 +31,7 @@ namespace Task1.Player
         {
             if (collision.gameObject.TryGetComponent(out EnemyBase enemy))
             {
-                soundObject.GetComponent<Sound>().PlaySound(damageSound, soundCategory);
+                sound.Play();
                 enemy.TakeDamage(weapon.GetDamage * player.DoDamage(), player);
             }
 
