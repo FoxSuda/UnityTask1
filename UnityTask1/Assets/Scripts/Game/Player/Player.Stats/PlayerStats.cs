@@ -9,8 +9,7 @@ namespace Task1.Player
         [SerializeField] private PlayerScore playerScore;
 
         [SerializeField] private GameObject soundObject;
-        [SerializeField] private AudioClip TakedamageSound;
-        private int soundCategory = 0;
+        [SerializeField] private AudioSource TakedamageSound;
 
         private GameObject currentWeapon;
 
@@ -60,7 +59,7 @@ namespace Task1.Player
         }
         public void TakeDamage(float damageAmount)
         {
-            //soundObject.GetComponent<SoundSlider>().PlaySound(TakedamageSound, soundCategory);
+            TakedamageSound.Play();
             _health -= damageAmount;
         }
 

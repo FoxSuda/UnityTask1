@@ -7,6 +7,7 @@ namespace Task1.Player
     public class Shooting : MonoBehaviour
     {
         [SerializeField] private PlayerStats playerStats;
+        [SerializeField] private PlayerUIInstantiate playerUIInstantiate;
 
         [SerializeField] private GameObject inputControllerObject;
         [SerializeField] private GameObject soundObject;
@@ -38,7 +39,7 @@ namespace Task1.Player
                 {
                     pooledBullet.transform.position = firePoint.position;
                     pooledBullet.transform.rotation = transform.rotation;
-                    pooledBullet.Initialize(playerStats, shootWeapon, ReleaseBullet);
+                    pooledBullet.Initialize(playerStats, shootWeapon, ReleaseBullet, playerUIInstantiate);
                     pooledBullet.soundObject = soundObject;
 
                     Rigidbody rb = pooledBullet.GetComponent<Rigidbody>();

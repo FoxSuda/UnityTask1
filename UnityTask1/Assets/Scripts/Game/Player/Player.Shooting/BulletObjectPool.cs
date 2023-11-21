@@ -24,7 +24,7 @@ namespace Task1.Pool
 
         protected override Task1.Player.PlayerBullet OnCreatePoolObject()
         {
-            GameObject bulletObject = Instantiate(_prefab, Vector3.zero, Quaternion.identity, _parent);
+            GameObject bulletObject = Instantiate(_prefab[0], Vector3.zero, Quaternion.identity, _parent);
             Task1.Player.PlayerBullet bullet = bulletObject.GetComponent<Task1.Player.PlayerBullet>();
             return bullet;
         }

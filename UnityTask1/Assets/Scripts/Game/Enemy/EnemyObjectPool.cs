@@ -25,7 +25,8 @@ namespace Task1.Enemy
 
         protected override EnemyBase OnCreatePoolObject()
         {
-            GameObject enemyObject = Instantiate(_prefab, Vector3.zero, Quaternion.identity, _parent);
+            int randomIndex = Random.Range(0, _prefab.Length);
+            GameObject enemyObject = Instantiate(_prefab[randomIndex], Vector3.zero, Quaternion.identity, _parent);
             EnemyBase enemy = enemyObject.GetComponent<EnemyBase>();
             return enemy;
         }

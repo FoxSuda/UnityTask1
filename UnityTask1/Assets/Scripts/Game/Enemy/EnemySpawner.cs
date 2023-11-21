@@ -32,18 +32,6 @@ namespace Task1.Enemy
                 {
                     enemy.Initialize(randomPointOnPlane, ReleaseEnemy);
                 }
-                
-                // GameObject newEnemy = EnemySpawnObjectPool.enemySharedInstance.GetEnemyPooledObject();
-                //
-                // if (newEnemy != null)
-                // {
-                //     newEnemy.transform.position = randomPointOnPlane;
-                //     newEnemy.transform.rotation = Quaternion.identity;
-                //     newEnemy.SetActive(true);
-                //
-                //     DamagePlayer damagePlayer = newEnemy.GetComponent<DamagePlayer>();
-                //     damagePlayer.soundObject = soundObject;
-                // }
 
                 yield return new WaitForSeconds(spawnInterval);
             }

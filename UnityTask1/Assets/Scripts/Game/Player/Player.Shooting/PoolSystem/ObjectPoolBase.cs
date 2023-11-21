@@ -3,7 +3,7 @@ using UnityEngine.Pool;
 
 public abstract class ObjectPoolBase<T> : MonoBehaviour where T : class
 {
-    [SerializeField] protected GameObject _prefab;
+    [SerializeField] protected GameObject[] _prefab;
     [SerializeField] protected Transform _parent;
     [SerializeField] protected  bool collectionChecks = true;
     [SerializeField] protected  int defaultPoolSize = 15;
