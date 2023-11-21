@@ -21,7 +21,6 @@ namespace Task1.Enemy
         protected override void OnGetObjectFromPool(EnemyBase poolable)
         {
             poolable.gameObject.SetActive(true);
-            
         }
 
         protected override EnemyBase OnCreatePoolObject()

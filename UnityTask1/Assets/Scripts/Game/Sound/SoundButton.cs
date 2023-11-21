@@ -8,9 +8,20 @@ public class SoundButton : MonoBehaviour
     [SerializeField] private string audioChannel;
     [SerializeField] private float minVolume;
     [SerializeField] private float maxVolume;
-    private bool isMuted;
+    public bool isMuted;
     [SerializeField] private Slider volumeSlider;
     private Text text;
+
+    private void Start()
+    {
+        if (isMuted)
+        {
+            Mute();
+        } else
+        {
+            Unmute();
+        }
+    }
 
     private void Awake()
     {

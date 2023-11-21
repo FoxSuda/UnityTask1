@@ -44,20 +44,6 @@ namespace Task1.Player
                     Rigidbody rb = pooledBullet.GetComponent<Rigidbody>();
                     rb.velocity = transform.forward * bulletSpeed;
                 }
-                // GameObject bullet = ShootingObjectPool.bulletSharedInstance.GetBulletPooledObject();
-                // if (bullet != null)
-                // {
-                //     bullet.transform.position = firePoint.position;
-                //     bullet.transform.rotation = transform.rotation;
-                //     bullet.SetActive(true);
-                //
-                //     DamageEnemy playerBullet = bullet.GetComponent<DamageEnemy>();
-                //     playerBullet.DoDamageToEnemy(playerStats, shootWeapon);
-                //     playerBullet.soundObject = soundObject;
-                //
-                //     Rigidbody rb = bullet.GetComponent<Rigidbody>();
-                //     rb.velocity = transform.forward * bulletSpeed;
-                // }
             }
             else
             {

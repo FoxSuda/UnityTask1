@@ -10,15 +10,21 @@ public class SoundSlider : MonoBehaviour
     [SerializeField] private string volumeChannel;
     [SerializeField] private Slider volumeSlider;
 
+    [SerializeField] private GameObject soundOptions;
+    private SoundSettings soundSettings;
+
     private void Awake()
     {
-        volumeSlider.onValueChanged.AddListener(delegate { ChangeVolume(); });
+       volumeSlider.onValueChanged.AddListener(delegate { ChangeVolume(); });
     }
 
     private void Start()
     {
-        audioMixer.GetFloat(volumeChannel, out float startVolume);
-        volumeSlider.value = (startVolume - minVolume) / (maxVolume - minVolume);
+        audioMixer.SetFloat(volumeChannel, minVolume + (maxVolume - minVolume) * volumeSlider.value);
+        if (soundOptions != null)
+        {
+            soundOptions.SetActive(false);
+        }
     }
 
     public void ChangeVolume()

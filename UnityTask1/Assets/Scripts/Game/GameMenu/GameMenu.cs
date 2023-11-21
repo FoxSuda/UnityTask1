@@ -3,18 +3,12 @@ using UnityEngine.UI;
 
 public class GameMenu : MonoBehaviour
 {
-    private AudioManager audioManager;
     private InputController inputController;
-    [SerializeField] private GameObject soundObject;
 
     [SerializeField] private GameObject inputControllerObject;
     [SerializeField] private GameObject ObjectMainMenu;
     [SerializeField] private GameObject ObjectOptionsMenu;
     [SerializeField] private Button[] buttonObjectsMenu = new Button[3];
-
-    public bool mainVolumeMute = false;
-    public bool sfxVolumeMute = false;
-    public bool musicVolumeMute = false;
 
     private bool menuOpened = false;
 
@@ -79,35 +73,5 @@ public class GameMenu : MonoBehaviour
     private void QuitGame()
     {
         Application.Quit();
-    }
-    
-    private void MuteMainVolume()
-    {
-        mainVolumeMute = !mainVolumeMute;
-    }
-    
-    private void MuteSFXVolume()
-    {
-        sfxVolumeMute = !sfxVolumeMute;
-    }
-    
-    private void MuteMusicVolume()
-    {
-        musicVolumeMute = !musicVolumeMute;
-    }
-
-    private void OnMainVolumeChanged(float newValue)
-    {
-        audioManager.MainVolume = newValue;
-    }
-    
-    private void OnSFXVolumeChanged(float newValue)
-    {
-        audioManager.SfxVolume = newValue;
-    }
-    
-    private void OnMusicVolumeChanged(float newValue)
-    {
-        audioManager.MusicVolume = newValue;
     }
 }
