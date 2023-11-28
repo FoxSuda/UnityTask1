@@ -17,6 +17,10 @@ namespace Task1.Player
         [SerializeField] private int _score;
         [SerializeField] private float _damage;
 
+        public delegate void PlayerChangedDelegate();
+        public event PlayerChangedDelegate OnWeaponChanged;
+        public event PlayerChangedDelegate OnHealthChanged;
+
         private void Awake()
         {
             _health = playerConfiguration.Health;
@@ -47,6 +51,7 @@ namespace Task1.Player
         public void SetCurrentWeapon(GameObject currentWeapon)
         {
             this.currentWeapon = currentWeapon;
+            OnWeaponChanged?.Invoke();
         }
         public float GetScore()
         {
@@ -61,6 +66,7 @@ namespace Task1.Player
         {
             TakedamageSound.Play();
             _health -= damageAmount;
+            OnHealthChanged?.Invoke();
         }
 
     }

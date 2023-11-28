@@ -5,6 +5,9 @@ public class PlayerWeaponBase : MonoBehaviour
 {
     public WeaponConfiguration weaponConfiguration;
 
+    public delegate void AmmoChangedDelegate();
+    public event AmmoChangedDelegate OnAmmoChanged;
+
     public int currentAmmo;
     private bool isReloading = false;
 
@@ -42,6 +45,7 @@ public class PlayerWeaponBase : MonoBehaviour
         if (currentAmmo > 0 && !isReloading)
         {
             currentAmmo--;
+            OnAmmoChanged?.Invoke();
             return true;
         }
         return false;
@@ -60,6 +64,7 @@ public class PlayerWeaponBase : MonoBehaviour
     {
         yield return new WaitForSeconds(weaponConfiguration.ReloadTime);
         currentAmmo = weaponConfiguration.MaxAmmo;
+        OnAmmoChanged?.Invoke();
         isReloading = false;
     }
 }
