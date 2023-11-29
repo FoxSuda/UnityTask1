@@ -24,6 +24,7 @@ namespace Task1.UI
         public void StartGame()
         {
             SceneManager.LoadScene("Main");
+            SceneManager.LoadScene("MainPart0", LoadSceneMode.Additive);
         }
 
         public void QuitGame()

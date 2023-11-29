@@ -3,7 +3,7 @@ using Task1.FilesManagment;
 using Task1.Settings;
 using UnityEngine;
 
-public class GameSettingsLoader : MonoBehaviour
+public class GameSettingsLoader
 {
     private IFileDownloader fileDownloader;
     private IFileUploader<GameSettings> fileUploader;
