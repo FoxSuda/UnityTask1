@@ -1,4 +1,3 @@
-using Task1.Player;
 using Task1.Pool;
 using UnityEngine;
 
@@ -13,7 +12,8 @@ namespace Task1.Player
         private InputController inputController;
 
         [SerializeField] private float bulletSpeed = 45f;
-
+        [SerializeField] private GameObject playSoundObject;
+        [SerializeField] private Transform parentSoundObject;
         [SerializeField] private Transform firePoint;
         [SerializeField] private BulletObjectPool _bulletObjectPool;
         
@@ -38,7 +38,7 @@ namespace Task1.Player
                 {
                     pooledBullet.transform.position = firePoint.position;
                     pooledBullet.transform.rotation = transform.rotation;
-                    pooledBullet.Initialize(playerStats, shootWeapon, ReleaseBullet, playerUIInstantiate);
+                    pooledBullet.Initialize(playerStats, shootWeapon, ReleaseBullet, playerUIInstantiate, playSoundObject, parentSoundObject);
 
                     Rigidbody rb = pooledBullet.GetComponent<Rigidbody>();
                     rb.velocity = transform.forward * bulletSpeed;

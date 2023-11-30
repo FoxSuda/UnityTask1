@@ -8,7 +8,6 @@ namespace Task1.Enemy
 {
     public class Enemy : EnemyBase
     {
-        [HideInInspector] public GameObject soundObject;
         [SerializeField] private AudioClip damageSound;
         [SerializeField] private int soundCategory = 0;
 

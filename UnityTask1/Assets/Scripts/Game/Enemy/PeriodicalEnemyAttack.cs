@@ -4,15 +4,13 @@ using UnityEngine;
 
 public class PeriodicalEnemyAttack : EnemyBaseAttack
 {
-    [HideInInspector] public GameObject soundObject;
     [SerializeField] private AudioClip damageSound;
     [SerializeField] private AudioSource sound;
-    [SerializeField] private int soundCategory = 0;
 
     private bool isAttacking = false;
+    private bool canAttacking = true;
     private float attackInterval = 1.0f;
     private Player _currentAttackTarget;
-    private IEnumerator _attackRoutine;
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -28,22 +26,20 @@ public class PeriodicalEnemyAttack : EnemyBaseAttack
         if (collision.gameObject.TryGetComponent(out Player player))
         {
             isAttacking = false;
-            if (_attackRoutine == null)
-            {
-                _attackRoutine = AttackRoutine();
-            }
 
-            StopCoroutine(_attackRoutine);
+            StopCoroutine(AttackRoutine());
         }
     }
 
     private IEnumerator AttackRoutine()
     {
-        while (isAttacking)
+        while (isAttacking && canAttacking)
         {
             sound.Play();
             _currentAttackTarget.TakeDamage(enemyConfiguration.Damage);
+            canAttacking = false;
             yield return new WaitForSeconds(attackInterval);
+            canAttacking = true;
         }
     }
 
@@ -54,12 +50,7 @@ public class PeriodicalEnemyAttack : EnemyBaseAttack
             return;
         }
         
-        if (_attackRoutine == null)
-        {
-            _attackRoutine = AttackRoutine();
-        }
-        
         isAttacking = true;
-        StartCoroutine(_attackRoutine);
+        StartCoroutine(AttackRoutine());
     }
 }

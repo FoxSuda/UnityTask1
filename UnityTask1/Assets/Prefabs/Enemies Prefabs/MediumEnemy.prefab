@@ -143,7 +143,6 @@ GameObject:
   - component: {fileID: 5471286506491357800}
   - component: {fileID: 6955017110890578134}
   - component: {fileID: 2989394229978694683}
-  - component: {fileID: 8813247455984135538}
   - component: {fileID: 1264312973908752517}
   - component: {fileID: 8318833055673072311}
   - component: {fileID: 73151350459537905}
@@ -241,21 +240,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
---- !u!114 &8813247455984135538
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1543926529138168537}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e5b15e850c3fb984aa7bd8032a9c7e55, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  soundObject: {fileID: 0}
-  damageSound: {fileID: 8300000, guid: 4906c3d59527a44459f9478eb77de26c, type: 3}
-  soundCategory: 0
 --- !u!114 &1264312973908752517
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -282,10 +266,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyConfiguration: {fileID: 11400000, guid: f88007f27df032546bc8a2360962e202, type: 2}
-  soundObject: {fileID: 0}
   damageSound: {fileID: 8300000, guid: 4906c3d59527a44459f9478eb77de26c, type: 3}
   sound: {fileID: 1715348978429920274}
-  soundCategory: 0
 --- !u!114 &73151350459537905
 MonoBehaviour:
   m_ObjectHideFlags: 0

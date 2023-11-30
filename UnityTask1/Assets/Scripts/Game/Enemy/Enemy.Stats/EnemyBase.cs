@@ -53,7 +53,10 @@ namespace Task1.EnemyStats
         public void TakeDamage(float damageAmount, PlayerStats player, Transform obj)
         {
             _health -= damageAmount;
-            bloodParticleInstantiate.BloodInstantiate(gameObject.transform, obj);
+            if (bloodParticleInstantiate != null)
+            {
+                bloodParticleInstantiate.BloodInstantiate(gameObject.transform, obj);
+            }
             if (_health <= 0)
             {
                 player.AddScore(enemyConfiguration.ScoreForEnemy);

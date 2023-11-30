@@ -8,18 +8,22 @@ namespace Task1.Player
 {
     public class PlayerBullet : MonoBehaviour
     {
-        [SerializeField] private AudioClip damageSound;
-        [SerializeField] private AudioSource sound;
+        private GameObject soundPrefab;
+        private Transform soundPrefabParent;
 
+        private PlaySoundBullet soundBullet;
         private PlayerUIInstantiate playerUIInstantiate;
         private PlayerStats player;
         private PlayerWeaponBase weapon;
         private Action<PlayerBullet> OnBulletReleased;
-        public void Initialize(PlayerStats player, PlayerWeaponBase weapon, Action<PlayerBullet> onBulletReleased, PlayerUIInstantiate playerUIInstantiate)
+        public void Initialize(PlayerStats player, PlayerWeaponBase weapon, Action<PlayerBullet> onBulletReleased, PlayerUIInstantiate playerUIInstantiate, GameObject soundObj, Transform parentObj)
         {
+            soundBullet = gameObject.GetComponent<PlaySoundBullet>();
             this.player = player;
             this.weapon = weapon;
             this.playerUIInstantiate = playerUIInstantiate;
+            soundPrefab = soundObj;
+            soundPrefabParent = parentObj;
             OnBulletReleased = onBulletReleased;
             StartCoroutine(Released());
         }
@@ -34,7 +38,7 @@ namespace Task1.Player
             if (collision.gameObject.TryGetComponent(out EnemyBase enemy))
             {
                 float damage = weapon.GetDamage * player.DoDamage();
-                sound.Play();
+                soundBullet.PlaySoundHitBullet(soundPrefab, soundPrefabParent);
                 enemy.TakeDamage(damage, player, gameObject.transform);
                 playerUIInstantiate.OnObjectHit(gameObject.transform, damage);
             }
