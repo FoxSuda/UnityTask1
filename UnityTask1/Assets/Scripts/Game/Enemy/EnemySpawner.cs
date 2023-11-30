@@ -1,4 +1,5 @@
 using System.Collections;
+using Task1.EnemyParticleSystem;
 using Task1.EnemyStats;
 using UnityEngine;
 
@@ -13,7 +14,8 @@ namespace Task1.Enemy
 
         [SerializeField] private Transform[] spawnPoints;
         [SerializeField] private EnemyObjectPool _enemyObjectPool;
-        
+        [SerializeField] private BloodParticleInstantiate bloodParticleInstantiate;
+
 
         private void Start()
         {
@@ -30,7 +32,7 @@ namespace Task1.Enemy
                 var enemy = _enemyObjectPool.Pool.Get();
                 if (enemy != null)
                 {
-                    enemy.Initialize(randomPointOnPlane, ReleaseEnemy);
+                    enemy.Initialize(randomPointOnPlane, ReleaseEnemy, bloodParticleInstantiate);
                 }
 
                 yield return new WaitForSeconds(spawnInterval);

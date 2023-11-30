@@ -15,3 +15,4 @@ MonoBehaviour:
   damage: 15
   maxAmmo: 30
   reloadTime: 2
+  fireExplosion: {fileID: 6253456171939217361, guid: 238b3a7df13080c4c976564d27a99790, type: 3}

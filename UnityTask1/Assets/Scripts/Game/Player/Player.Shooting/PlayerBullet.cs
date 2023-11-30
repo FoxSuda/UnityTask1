@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using Task1.EnemyParticleSystem;
 using Task1.EnemyStats;
 using UnityEngine;
 
@@ -6,7 +8,6 @@ namespace Task1.Player
 {
     public class PlayerBullet : MonoBehaviour
     {
-        [HideInInspector] public GameObject soundObject;
         [SerializeField] private AudioClip damageSound;
         [SerializeField] private AudioSource sound;
 
@@ -20,6 +21,7 @@ namespace Task1.Player
             this.weapon = weapon;
             this.playerUIInstantiate = playerUIInstantiate;
             OnBulletReleased = onBulletReleased;
+            StartCoroutine(Released());
         }
 
         public void Dispose()
@@ -33,9 +35,16 @@ namespace Task1.Player
             {
                 float damage = weapon.GetDamage * player.DoDamage();
                 sound.Play();
-                enemy.TakeDamage(damage, player);
+                enemy.TakeDamage(damage, player, gameObject.transform);
                 playerUIInstantiate.OnObjectHit(gameObject.transform, damage);
             }
+
+            OnBulletReleased?.Invoke(this);
+        }
+
+        private IEnumerator Released()
+        {
+            yield return new WaitForSeconds(10f);
 
             OnBulletReleased?.Invoke(this);
         }

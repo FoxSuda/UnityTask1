@@ -10,10 +10,9 @@ namespace Task1.Player
         [SerializeField] private PlayerUIInstantiate playerUIInstantiate;
 
         [SerializeField] private GameObject inputControllerObject;
-        [SerializeField] private GameObject soundObject;
         private InputController inputController;
 
-        [SerializeField] private float bulletSpeed = 10f;
+        [SerializeField] private float bulletSpeed = 45f;
 
         [SerializeField] private Transform firePoint;
         [SerializeField] private BulletObjectPool _bulletObjectPool;
@@ -40,7 +39,6 @@ namespace Task1.Player
                     pooledBullet.transform.position = firePoint.position;
                     pooledBullet.transform.rotation = transform.rotation;
                     pooledBullet.Initialize(playerStats, shootWeapon, ReleaseBullet, playerUIInstantiate);
-                    pooledBullet.soundObject = soundObject;
 
                     Rigidbody rb = pooledBullet.GetComponent<Rigidbody>();
                     rb.velocity = transform.forward * bulletSpeed;

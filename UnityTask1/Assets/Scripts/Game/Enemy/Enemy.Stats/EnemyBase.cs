@@ -1,4 +1,5 @@
 using System;
+using Task1.EnemyParticleSystem;
 using Task1.Player;
 using UnityEngine;
 
@@ -10,10 +11,12 @@ namespace Task1.EnemyStats
         [SerializeField] private EnemyConfiguration enemyConfiguration;
         [SerializeField] private float _health;
         [SerializeField] private EnemyBaseAttack _enemyAttack;
+        private BloodParticleInstantiate bloodParticleInstantiate;
         protected Action<EnemyBase> OnEnemyReleased;
         
-        public void Initialize(Vector3 enemyPosition, Action<EnemyBase> onEnemyReleased)
+        public void Initialize(Vector3 enemyPosition, Action<EnemyBase> onEnemyReleased, BloodParticleInstantiate bloodParticle)
         {
+            bloodParticleInstantiate = bloodParticle;
             transform.position = enemyPosition;
             OnEnemyReleased = onEnemyReleased;
         }
@@ -47,9 +50,10 @@ namespace Task1.EnemyStats
             return enemyConfiguration.Damage;
         }
 
-        public void TakeDamage(float damageAmount, PlayerStats player)
+        public void TakeDamage(float damageAmount, PlayerStats player, Transform obj)
         {
             _health -= damageAmount;
+            bloodParticleInstantiate.BloodInstantiate(gameObject.transform, obj);
             if (_health <= 0)
             {
                 player.AddScore(enemyConfiguration.ScoreForEnemy);

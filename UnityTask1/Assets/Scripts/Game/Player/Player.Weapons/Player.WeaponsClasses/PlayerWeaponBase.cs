@@ -11,6 +11,8 @@ public class PlayerWeaponBase : MonoBehaviour
     public int currentAmmo;
     private bool isReloading = false;
 
+    [SerializeField] private ParticleSystem fireExplosion;
+
     private void Awake()
     {
         currentAmmo = weaponConfiguration.MaxAmmo;
@@ -44,6 +46,10 @@ public class PlayerWeaponBase : MonoBehaviour
     {
         if (currentAmmo > 0 && !isReloading)
         {
+            if (fireExplosion != null)
+            {
+                fireExplosion.Play();
+            }
             currentAmmo--;
             OnAmmoChanged?.Invoke();
             return true;
