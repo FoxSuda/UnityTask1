@@ -7,7 +7,7 @@ public class SceneLoader : MonoBehaviour
     {
         if (!SceneManager.GetSceneByName(sceneName).isLoaded)
         {
-            SceneManager.LoadScene(sceneName, LoadSceneMode.Additive);
+            SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
         }
         else
         {
