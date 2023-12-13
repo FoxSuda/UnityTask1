@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class OpenWeatherMapService : MonoBehaviour, IWeatherService
@@ -6,14 +7,16 @@ public class OpenWeatherMapService : MonoBehaviour, IWeatherService
     private string weatherUrl = "https://api.openweathermap.org/data/2.5/weather?lat={0}&lon={1}&appid={2}";
     private IRestApiService _restApiService;
 
+    public event Action<WeatherData> OnWeatherDataReceived;
+
     public void initialize(IRestApiService restApiService)
     {
         _restApiService = restApiService;
     }
 
-    public void GetWeather(float lat, float lon)
+    public void GetWeather(float lat, float lon, Action<WeatherData> onDataReceived)
     {
         string url = string.Format(weatherUrl, lat, lon, apiKey);
-        _restApiService.Get(url);
+        _restApiService.Get(url, onDataReceived);
     }
 }

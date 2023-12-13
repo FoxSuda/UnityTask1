@@ -1,13 +1,16 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Networking;
 
 public class UnityRestApi : MonoBehaviour, IRestApiService
 {
+    UnityWebRequest request;
 
-    public void Get(string url)
+    public void Get(string url, Action<WeatherData> onDataReceived)
     {
-        StartCoroutine(SendRequest(url, HttpMethod.Get));
+        string jsonData = null;
+        StartCoroutine(SendRequest(url, HttpMethod.Get, jsonData, onDataReceived));
     }
 
     public void Post<T>(string url, T data)
@@ -27,8 +30,9 @@ public class UnityRestApi : MonoBehaviour, IRestApiService
         StartCoroutine(SendRequest(url, HttpMethod.Delete));
     }
 
-    private IEnumerator SendRequest(string url, HttpMethod method, string jsonData = null)
+    private IEnumerator SendRequest(string url, HttpMethod method, string jsonData = null, Action<WeatherData> onDataReceived = null)
     {
+
         UnityWebRequest request;
 
         switch (method)
@@ -67,6 +71,11 @@ public class UnityRestApi : MonoBehaviour, IRestApiService
         else
         {
             Debug.Log("Response: " + request.downloadHandler.text);
+            if (method == HttpMethod.Get)
+            {
+                WeatherData data = JsonUtility.FromJson<WeatherData>(jsonData);
+                onDataReceived?.Invoke(data);
+            }
         }
     }
 }
