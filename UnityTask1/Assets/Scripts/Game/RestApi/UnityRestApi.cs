@@ -5,34 +5,30 @@ using UnityEngine.Networking;
 
 public class UnityRestApi : MonoBehaviour, IRestApiService
 {
-    UnityWebRequest request;
-
-    public void Get(string url, Action<WeatherData> onDataReceived)
+    public void Get<T>(string url, Action<T> onDataReceived)
     {
-        string jsonData = null;
-        StartCoroutine(SendRequest(url, HttpMethod.Get, jsonData, onDataReceived));
+        StartCoroutine(SendRequest(url, HttpMethod.Get, onDataReceived: onDataReceived));
     }
 
     public void Post<T>(string url, T data)
     {
         string jsonData = JsonUtility.ToJson(data);
-        StartCoroutine(SendRequest(url, HttpMethod.Post, jsonData));
+        StartCoroutine(SendRequest<UnityRestApi>(url, HttpMethod.Post, jsonData));
     }
 
     public void Put<T>(string url, T data)
     {
         string jsonData = JsonUtility.ToJson(data);
-        StartCoroutine(SendRequest(url, HttpMethod.Put, jsonData));
+        StartCoroutine(SendRequest<UnityRestApi>(url, HttpMethod.Put, jsonData));
     }
 
     public void Delete(string url)
     {
-        StartCoroutine(SendRequest(url, HttpMethod.Delete));
+        StartCoroutine(SendRequest<UnityRestApi>(url, HttpMethod.Delete));
     }
 
-    private IEnumerator SendRequest(string url, HttpMethod method, string jsonData = null, Action<WeatherData> onDataReceived = null)
+    private IEnumerator SendRequest<T>(string url, HttpMethod method, string jsonData = null, Action<T> onDataReceived = null)
     {
-
         UnityWebRequest request;
 
         switch (method)
@@ -70,10 +66,11 @@ public class UnityRestApi : MonoBehaviour, IRestApiService
         }
         else
         {
+            jsonData = request.downloadHandler.text;
             Debug.Log("Response: " + request.downloadHandler.text);
             if (method == HttpMethod.Get)
             {
-                WeatherData data = JsonUtility.FromJson<WeatherData>(jsonData);
+                T data = JsonUtility.FromJson<T>(jsonData);
                 onDataReceived?.Invoke(data);
             }
         }

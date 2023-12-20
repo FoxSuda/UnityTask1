@@ -14,13 +14,21 @@ public class GameSettingsManager : MonoBehaviour
     [SerializeField] private Slider sfxVolumeSlider;
     [SerializeField] private Slider musicVolumeSlider;
 
+    [SerializeField] private Button saveSettingsButton;
+
     private void Awake()
     {
+        saveSettingsButton.onClick.AddListener(SaveGameSettings);
         settingsLoader = new GameSettingsLoader();
         LoadSettings();
     }
 
-    private void OnApplicationQuit()
+    private void OnDestroy()
+    {
+        saveSettingsButton.onClick.RemoveListener(SaveGameSettings);
+    }
+
+    private void SaveGameSettings()
     {
         SaveSettings();
     }

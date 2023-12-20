@@ -1,0 +1,31 @@
+{
+  "project_info": {
+    "project_number": "505037134079",
+    "project_id": "unitytask1",
+    "storage_bucket": "unitytask1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:505037134079:ios:c6cdac332bad2a902d54ca",
+        "android_client_info": {
+          "package_name": "com.DefaultCompany.UnityTask1"
+        }
+      },
+      "api_key": [
+        {
+          "current_key": "AIzaSyDCsupLznLZYBM8TVZ7U6YjD53Hdj8OuE0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 0
+        },
+        "appinvite_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
