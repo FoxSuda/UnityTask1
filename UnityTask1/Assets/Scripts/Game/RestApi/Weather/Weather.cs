@@ -34,24 +34,19 @@ public class Weather : MonoBehaviour
 
     private void OnWeatherDataReceived(WeatherData weatherData)
     {
-        Debug.Log("Received weather data: " + weatherData.weather[0].main);
 
         if (weatherData.weather[0].main == "Clear")
         {
             UniStormManager.Instance.ChangeWeatherWithTransition(stormSystem.AllWeatherTypes[Random.Range(0, 1)]);
-            Debug.Log("Start weather Clear!!!!");
         } else if (weatherData.weather[0].main == "Clouds")
         {
             UniStormManager.Instance.ChangeWeatherWithTransition(stormSystem.AllWeatherTypes[Random.Range(2, 4)]);
-            Debug.Log("Start weather Clouds!!!!");
         } else if (weatherData.weather[0].main == "Rain")
         {
             UniStormManager.Instance.ChangeWeatherWithTransition(stormSystem.AllWeatherTypes[Random.Range(12, 14)]);
-            Debug.Log("Start weather Rain!!!!");
         } else if (weatherData.weather[0].main == "Snow")
         {
             UniStormManager.Instance.ChangeWeatherWithTransition(stormSystem.AllWeatherTypes[Random.Range(16, 18)]);
-            Debug.Log("Start weather Snow!!!!");
         }
     }
 

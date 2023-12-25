@@ -1,19 +1,25 @@
-﻿public class UserAudioSettingsData
-{
-    public float UserMasterVolume { get; }
-    public float UsersfxVolume { get; }
-    public float UserMusicVolume { get; }
-    public bool UserMasterVolumeMute { get; }
-    public bool UsersfxVolumeMute { get; }
-    public bool UserMusicVolumeMute { get; }
+﻿using Firebase.Firestore;
 
-    public UserAudioSettingsData(float userMasterVolume, float usersfxVolume, float userMusicVolume, bool userMasterVolumeMute, bool usersfxVolumeMute, bool userMusicVolumeMute)
-    {
-        UserMasterVolume = userMasterVolume;
-        UsersfxVolume = usersfxVolume;
-        UserMusicVolume = userMusicVolume;
-        UserMasterVolumeMute = userMasterVolumeMute;
-        UsersfxVolumeMute = usersfxVolumeMute;
-        UserMusicVolumeMute = userMusicVolumeMute;
-    }
+[FirestoreData]
+public class UserAudioSettingsData
+{
+    public float UserMasterVolume;
+    public float UsersfxVolume;
+    public float UserMusicVolume;
+    public bool UserMasterVolumeMute;
+    public bool UsersfxVolumeMute;
+    public bool UserMusicVolumeMute;
+
+    [FirestoreProperty]
+    public float userMasterVolume {  get; set; }
+    [FirestoreProperty]
+    public float usersfxVolume { get; set; }
+    [FirestoreProperty]
+    public float userMusicVolume { get; set; }
+    [FirestoreProperty]
+    public bool userMasterVolumeMute { get; set; }
+    [FirestoreProperty]
+    public bool usersfxVolumeMute { get; set; }
+    [FirestoreProperty]
+    public bool userMusicVolumeMute { get; set; }
 }

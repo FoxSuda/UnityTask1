@@ -10,12 +10,14 @@ public class PlayerUIController : MonoBehaviour
 
     [SerializeField] private PlayerAmmoDisplay playerAmmoDisplay;
     [SerializeField] private HealthCountDisplay healthCountDisplay;
+    [SerializeField] private PlayerCoinsDisplay playerCoinsDisplay;
 
     private void Awake()
     {
         playerStats.OnWeaponChanged += PlayerWeaponChanged;
         playerStats.OnWeaponChanged += PlayerAmmoChanged;
         playerStats.OnHealthChanged += PlayerHealthChanged;
+        playerStats.OnCoinsChanged += PlayerCoinsChanged;
         PlayerHealthChanged();
     }
 
@@ -34,5 +36,10 @@ public class PlayerUIController : MonoBehaviour
     private void PlayerHealthChanged()
     {
         healthCountDisplay.DisplayHealth(playerStats.GetHealthLevel());
+    }
+
+    private void PlayerCoinsChanged()
+    {
+        playerCoinsDisplay.DisplayCoins(playerStats.GetCoins());
     }
 }

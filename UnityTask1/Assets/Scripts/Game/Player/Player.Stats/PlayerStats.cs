@@ -16,16 +16,21 @@ namespace Task1.Player
         [SerializeField] private float _health;
         [SerializeField] private int _score;
         [SerializeField] private float _damage;
+        [SerializeField] private int _coins = 0;
+
+        private int coinsChanged = 0;
 
         public delegate void PlayerChangedDelegate();
         public event PlayerChangedDelegate OnWeaponChanged;
         public event PlayerChangedDelegate OnHealthChanged;
+        public event PlayerChangedDelegate OnCoinsChanged;
 
         private void Awake()
         {
             _health = playerConfiguration.Health;
             _score = playerConfiguration.Score;
             _damage = playerConfiguration.Damage;
+            _coins = playerConfiguration.Coins;
         }
 
         public float GetMovementSpeed()
@@ -57,9 +62,24 @@ namespace Task1.Player
         {
             return _score;
         }
+        public int GetCoins()
+        {
+            return _coins;
+        }
+        public void AddCoins(int coins)
+        {
+            coinsChanged += coins;
+            if (coinsChanged >= 10)
+            {
+                _coins += coinsChanged;
+                coinsChanged = 0;
+                OnCoinsChanged.Invoke();
+            }
+        }
         public void AddScore(int score)
         {
             _score += score;
+            AddCoins(score);
             playerScore.AddScore();
         }
         public void TakeDamage(float damageAmount)

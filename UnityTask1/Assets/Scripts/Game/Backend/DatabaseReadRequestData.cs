@@ -1,4 +1,9 @@
 ﻿public class DatabaseReadRequestData
 {
-    public string path;
+    public string Path { get; }
+
+    public DatabaseReadRequestData(string path)
+    {
+        Path = path;
+    }
 }

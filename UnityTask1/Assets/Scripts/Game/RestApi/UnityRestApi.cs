@@ -67,7 +67,6 @@ public class UnityRestApi : MonoBehaviour, IRestApiService
         else
         {
             jsonData = request.downloadHandler.text;
-            Debug.Log("Response: " + request.downloadHandler.text);
             if (method == HttpMethod.Get)
             {
                 T data = JsonUtility.FromJson<T>(jsonData);

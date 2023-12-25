@@ -15,6 +15,7 @@ public class GameSettingsManager : MonoBehaviour
     [SerializeField] private Slider musicVolumeSlider;
 
     [SerializeField] private Button saveSettingsButton;
+    [SerializeField] private FirebaseManager firebaseController;
 
     private void Awake()
     {
@@ -50,6 +51,19 @@ public class GameSettingsManager : MonoBehaviour
 
         Debug.Log("Loaded settings: " + settings);
     }
+    
+    public void OnSettingsLoadedData(UserSettingsData settings)
+    {
+        masterVolumeSlider.value = settings.userAudioSettingsData.UserMasterVolume;
+        sfxVolumeSlider.value = settings.userAudioSettingsData.UsersfxVolume;
+        musicVolumeSlider.value = settings.userAudioSettingsData.UserMusicVolume;
+
+        masterVolumeMuted.isMuted = settings.userAudioSettingsData.UserMasterVolumeMute;
+        sfxVolumeMuted.isMuted = settings.userAudioSettingsData.UsersfxVolumeMute;
+        musicVolumeMuted.isMuted = settings.userAudioSettingsData.UserMusicVolumeMute;
+
+        Debug.Log("Loaded settings: " + settings);
+    }
 
     private void SaveSettings()
     {
@@ -64,6 +78,19 @@ public class GameSettingsManager : MonoBehaviour
         settings.SoundSettings.sfxVolumeMute = sfxVolumeMuted.isMuted;
         settings.SoundSettings.musicVolumeMute = musicVolumeMuted.isMuted;
 
+        UserAudioSettingsData userAudioSettingsData = new();
+        userAudioSettingsData.UserMasterVolume = masterVolumeSlider.value;
+        userAudioSettingsData.UsersfxVolume = sfxVolumeSlider.value;
+        userAudioSettingsData.UserMusicVolume = musicVolumeSlider.value;
+
+        userAudioSettingsData.UserMasterVolumeMute = masterVolumeMuted.isMuted;
+        userAudioSettingsData.UsersfxVolumeMute = sfxVolumeMuted.isMuted;
+        userAudioSettingsData.UserMusicVolumeMute = musicVolumeMuted.isMuted;
+
+        UserSettingsData userSettingsData = new UserSettingsData();
+        userSettingsData.userAudioSettingsData = userAudioSettingsData;
+
+        firebaseController.SaveUserSettings(userSettingsData);
         settingsLoader.UploadSettings("", settings);
         Debug.Log("Settings saved.");
     }

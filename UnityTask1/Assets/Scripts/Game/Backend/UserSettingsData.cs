@@ -1,4 +1,10 @@
-﻿public class UserSettingsData
+﻿using Firebase.Firestore;
+
+[FirestoreData]
+public class UserSettingsData
 {
-    public UserAudioSettingsData UserAudioSettingsData { get; }
+    public UserAudioSettingsData UserAudioSettingsData;
+
+    [FirestoreProperty]
+    public UserAudioSettingsData userAudioSettingsData { get; set; }
 }

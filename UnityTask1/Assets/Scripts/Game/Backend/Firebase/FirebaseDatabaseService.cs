@@ -14,7 +14,27 @@ public class FirebaseDatabaseService : IDataBaseService
         _firestoreDatabase = FirebaseFirestore.DefaultInstance;
     }
 
-    public async void CreateDocument<T, D>(DatabaseWriteRequestData<T> writeRequestData, Action<DatabaseResponseData<D>> onResponse)
+    public void CreateDocument<T, D>(DatabaseWriteRequestData<T> writeRequestData, Action<DatabaseResponseData<D>> onResponse)
+    {
+        Task createDocumentImp = CreateDocumentImp(writeRequestData, onResponse);
+    }
+
+    public void DeleteDocument<T, D>(DatabaseWriteRequestData<T> writeRequestData, Action<DatabaseResponseData<D>> onResponse)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void GetDocument<T>(DatabaseReadRequestData readRequestData, Action<DatabaseResponseData<T>> onResponse)
+    {
+        Task getDocumentImp = GetDocumentImp(readRequestData, onResponse);
+    }
+
+    public void UpdateDocument<T, D>(DatabaseWriteRequestData<T> writeRequestData, Action<DatabaseResponseData<D>> onResponse)
+    {
+        Task updateDocumentImp = UpdateDocumentImp(writeRequestData, onResponse);
+    }
+
+    private async Task CreateDocumentImp<T, D>(DatabaseWriteRequestData<T> writeRequestData, Action<DatabaseResponseData<D>> onResponse)
     {
         try
         {
@@ -22,6 +42,8 @@ public class FirebaseDatabaseService : IDataBaseService
             string document = writeRequestData.Path.Split(',')[1];
 
             DocumentReference docRef = _firestoreDatabase.Collection(collection).Document(document);
+
+            Debug.Log("Data to be sent to Firestore: " + JsonUtility.ToJson(writeRequestData.Data));
 
             Task setAsynTask = docRef.SetAsync(writeRequestData.Data);
             await setAsynTask;
@@ -34,17 +56,12 @@ public class FirebaseDatabaseService : IDataBaseService
         }
     }
 
-    public void DeleteDocument<T, D>(DatabaseWriteRequestData<T> writeRequestData, Action<DatabaseResponseData<D>> onResponse)
-    {
-        throw new NotImplementedException();
-    }
-
-    public async void GetDocument<T>(DatabaseReadRequestData readRequestData, Action<DatabaseResponseData<T>> onResponse)
+    private async Task GetDocumentImp<T>(DatabaseReadRequestData readRequestData, Action<DatabaseResponseData<T>> onResponse)
     {
         try
         {
-            string collection = readRequestData.path.Split(',')[0];
-            string document = readRequestData.path.Split(',')[1];
+            string collection = readRequestData.Path.Split(',')[0];
+            string document = readRequestData.Path.Split(',')[1];
 
             DocumentReference docRef = _firestoreDatabase.Collection(collection).Document(document);
             DocumentSnapshot documentSnapShot = await docRef.GetSnapshotAsync();
@@ -57,13 +74,14 @@ public class FirebaseDatabaseService : IDataBaseService
             onResponse?.Invoke(databaseResponseData);
             Debug.Log(documentSnapShot.Reference.Id);
 
-        } catch (Exception e)
+        }
+        catch (Exception e)
         {
             Debug.LogError(e);
         }
     }
 
-    public async void UpdateDocument<T, D>(DatabaseWriteRequestData<T> writeRequestData, Action<DatabaseResponseData<D>> onResponse)
+    private async Task UpdateDocumentImp<T, D>(DatabaseWriteRequestData<T> writeRequestData, Action<DatabaseResponseData<D>> onResponse)
     {
         try
         {

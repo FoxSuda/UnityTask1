@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4815a5b52693154c8b04b40d9a28e84, type: 3}
   m_Name: Player configuration
   m_EditorClassIdentifier: 
-  moveSpeed: 35
+  moveSpeed: 7
   jumpForce: 8
   health: 100
   damage: 1

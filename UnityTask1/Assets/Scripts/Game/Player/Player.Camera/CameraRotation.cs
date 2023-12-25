@@ -20,16 +20,19 @@ namespace Task1.PlayerCamera
 
         private void Update()
         {
-            float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * sensX;
-            float mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime * sensY;
+            if (Time.timeScale != 0f)
+            {
+                float mouseX = Input.GetAxisRaw("Mouse X") * sensX;
+                float mouseY = Input.GetAxisRaw("Mouse Y") * sensY;
 
-            yRotation += mouseX;
+                yRotation += mouseX;
 
-            xRotation -= mouseY;
-            xRotation = Mathf.Clamp(xRotation, -150f, 0f);
+                xRotation -= mouseY;
+                xRotation = Mathf.Clamp(xRotation, -150f, 0f);
 
-            transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
-            orientation.rotation = Quaternion.Euler(0, yRotation, 0);
+                transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
+                orientation.rotation = Quaternion.Euler(0, yRotation, 0);
+            }
         }
     }
 }
