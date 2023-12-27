@@ -756,7 +756,7 @@ MonoBehaviour:
   sfxVolumeSlider: {fileID: 273593689}
   musicVolumeSlider: {fileID: 1319149278}
   saveSettingsButton: {fileID: 871335494}
-  firebaseController: {fileID: 1959182844}
+  firebaseController: {fileID: 1959182845}
 --- !u!114 &72253469
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3588,7 +3588,7 @@ MonoBehaviour:
   OnLightningStrikeObjectEvent:
     m_PersistentCalls:
       m_Calls: []
-  WeatherSoundsVolume: 1
+  WeatherSoundsVolume: 0.6
   AmbienceVolume: 1
   MusicVolume: 1
   TimeSlider: {fileID: 0}
@@ -3599,7 +3599,7 @@ MonoBehaviour:
   UniStormMenuKey: 27
   UniStormCanvas: {fileID: 0}
   m_MenuToggle: 0
-  TabNumber: 0
+  TabNumber: 3
   TimeTabNumbers: 0
   WeatherTabNumbers: 1
   CelestialTabNumbers: 0
@@ -3641,7 +3641,7 @@ MonoBehaviour:
   Year: 2020
   DayLength: 12
   NightLength: 12
-  TimeOfDayUpdateSeconds: 5
+  TimeOfDayUpdateSeconds: 0
   UseTimeOfDayUpdateControl: 1
   m_TimeFloat: 0
   TimeFlow: 0
@@ -3847,7 +3847,7 @@ MonoBehaviour:
   NextWeatherType: {fileID: 0}
   ByPassCoverageTransition: 0
   m_PrecipitationOdds: 50
-  TransitionSpeed: 3
+  TransitionSpeed: 6
   HourToChangeWeather: 0
   UniStormWindZone: {fileID: 0}
   m_SoundTransform: {fileID: 0}
@@ -4455,7 +4455,7 @@ MonoBehaviour:
   m_CloudShadows: {fileID: 0}
   m_CurrentCloudHeight: 0
   CloudShadowResolution: 1
-  CloudSpeed: 5
+  CloudSpeed: 10
   CloudTurbulence: 5
   DetectionLayerMask:
     serializedVersion: 2
@@ -4655,7 +4655,7 @@ MonoBehaviour:
   FogLightFalloff: 9.7
   CameraFogHeight: 0.85
   m_SunLight: {fileID: 0}
-  SunRevolution: 0
+  SunRevolution: 83
   SunIntensity: 1
   SunAttenuationMultipler: 1
   PrecipitationSunIntensity: 0.25
@@ -4682,7 +4682,7 @@ MonoBehaviour:
       outWeight: 0.33333334
     - serializedVersion: 3
       time: 7.018123
-      value: 1.75
+      value: 2
       inSlope: 0.00529797
       outSlope: 0.00529797
       tangentMode: 0
@@ -4691,7 +4691,7 @@ MonoBehaviour:
       outWeight: 0.33333334
     - serializedVersion: 3
       time: 12.760666
-      value: 1.75
+      value: 2.6
       inSlope: -0.0005448237
       outSlope: -0.0005448237
       tangentMode: 0
@@ -4700,7 +4700,7 @@ MonoBehaviour:
       outWeight: 0.33333334
     - serializedVersion: 3
       time: 18.260645
-      value: 1.75
+      value: 2
       inSlope: -0.0053261714
       outSlope: -0.0053261714
       tangentMode: 0
@@ -5316,9 +5316,9 @@ MonoBehaviour:
   SunShadowResolution: 2
   MoonShadowResolution: 1
   LightningShadowResolution: 1
-  SunShadowStrength: 0.587
+  SunShadowStrength: 0.508
   MoonShadowStrength: 0.75
-  LightningShadowStrength: 0.75
+  LightningShadowStrength: 0.6
   MoonPhaseList:
   - MoonPhaseTexture: {fileID: 2800000, guid: 09d7e7623c84bde49882ef3b630d9310, type: 3}
     MoonPhaseIntensity: 1.32
@@ -5393,8 +5393,8 @@ MonoBehaviour:
     m_ColorSpace: -1
     m_NumColorKeys: 6
     m_NumAlphaKeys: 2
-  SunLightShaftsBlurSize: 2.95
-  SunLightShaftsBlurIterations: 2
+  SunLightShaftsBlurSize: 4.15
+  SunLightShaftsBlurIterations: 3
   MoonLightShaftIntensity:
     serializedVersion: 2
     m_Curve:
@@ -9676,7 +9676,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1959182843}
-  - component: {fileID: 1959182844}
+  - component: {fileID: 1959182845}
   m_Layer: 0
   m_Name: Firebase
   m_TagString: Untagged
@@ -9699,7 +9699,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1959182844
+--- !u!114 &1959182845
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9708,13 +9708,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1959182842}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e69151e98cee65c4daa671630cc8fb10, type: 3}
+  m_Script: {fileID: 11500000, guid: 6695b8925f8e8004babc78bf0dd71479, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   playerStats: {fileID: 5178080750250187575}
   gameSettingsManager: {fileID: 72253468}
-  _userCoins: 0
-  userId: player6
 --- !u!1 &1966274971
 GameObject:
   m_ObjectHideFlags: 0
@@ -9872,9 +9870,9 @@ Light:
     m_Type: 2
     m_Resolution: 1
     m_CustomResolution: -1
-    m_Strength: 0.75
+    m_Strength: 0.848
     m_Bias: 0.05
-    m_NormalBias: 0.15
+    m_NormalBias: 0.25
     m_NearPlane: 0.2
     m_CullingMatrixOverride:
       e00: 1
@@ -10452,20 +10450,20 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
-  m_Intensity: 1
+  m_Color: {r: 0.7830189, g: 0.7602274, b: 0.69806874, a: 1}
+  m_Intensity: 1.8
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
-  m_CookieSize: 10
+  m_CookieSize: 1
   m_Shadows:
-    m_Type: 2
+    m_Type: 0
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
-    m_Bias: 0.05
-    m_NormalBias: 0.4
-    m_NearPlane: 0.2
+    m_Bias: 0.09
+    m_NormalBias: 0.38
+    m_NearPlane: 0.53
     m_CullingMatrixOverride:
       e00: 1
       e01: 0
@@ -10487,7 +10485,7 @@ Light:
   m_Cookie: {fileID: 0}
   m_DrawHalo: 0
   m_Flare: {fileID: 0}
-  m_RenderMode: 0
+  m_RenderMode: 2
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -10511,13 +10509,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2095599411}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 3.88, z: 0}
+  m_LocalRotation: {x: 0.30933332, y: -0.0056828586, z: 0.0018485994, w: 0.9509349}
+  m_LocalPosition: {x: 0, y: 52.2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 36.039, y: -0.685, z: 0}
 --- !u!4 &18850069030638599
 Transform:
   m_ObjectHideFlags: 0
